@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tarana Bansal | Markets operations workbench</title>
+<meta name="description" content="Tarana Bansal, PGDM Finance and Analytics. Markets operations, control and analytics: live models for collateral, P&L explain, trade reconciliation, settlements and asset servicing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tarana Bansal | Markets operations workbench">
+<meta property="og:description" content="Seven live models of a bank markets back office: collateral, P&amp;L explain, trade reconciliation, structured trade review, settlements, asset servicing and metric governance.">
+<meta property="og:url" content="https://taranapgdm27g-png.github.io/investment-banking/markets.html">
+<meta property="og:image" content="https://taranapgdm27g-png.github.io/investment-banking/og-card.png">
+<link rel="canonical" href="https://taranapgdm27g-png.github.io/BOFA/">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tarana Bansal | Markets operations, control and analytics">
+<meta name="twitter:image" content="https://taranapgdm27g-png.github.io/investment-banking/og-card.png">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0A1224" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23012169'/%3E%3Crect x='14' y='40' width='36' height='5' fill='%23E31837'/%3E%3Ctext x='32' y='34' font-family='Arial' font-weight='700' font-size='20' text-anchor='middle' fill='%23fff'%3ETB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--soft:#F5F6F8;--card:#FFFFFF;--ink:#1B2230;--ink2:#465062;--muted:#6B7385;--line:#E3E6EC;--line2:#CBD1DB;--navy:#012169;--navy2:#0B2E7A;--red:#E31837;--gold:#B7862F;--up:#12805C;--dn:#C4122F;
+  --gt:rgba(18,128,92,.1);--at:rgba(183,134,47,.14);--rt:rgba(196,18,47,.09);--nt:rgba(1,33,105,.07);--shadow:0 1px 2px rgba(1,33,105,.05),0 10px 30px rgba(1,33,105,.07);
+  --f:"Libre Franklin","Franklin Gothic Medium","Helvetica Neue",Arial,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0A1224;--soft:#0E182E;--card:#111C34;--ink:#E8ECF4;--ink2:#C3CAD8;--muted:#8E98AC;--line:#1F2C47;--line2:#2C3C5E;--navy:#7FA6FF;--navy2:#A8C1FF;--red:#FF5A6E;--gold:#E0B868;--up:#3CCB94;--dn:#FF6B7D;--gt:rgba(60,203,148,.14);--at:rgba(224,184,104,.16);--rt:rgba(255,90,110,.14);--nt:rgba(127,166,255,.1);--shadow:0 16px 40px rgba(0,0,0,.35)}}
+:root[data-theme="dark"]{--bg:#0A1224;--soft:#0E182E;--card:#111C34;--ink:#E8ECF4;--ink2:#C3CAD8;--muted:#8E98AC;--line:#1F2C47;--line2:#2C3C5E;--navy:#7FA6FF;--navy2:#A8C1FF;--red:#FF5A6E;--gold:#E0B868;--up:#3CCB94;--dn:#FF6B7D;--gt:rgba(60,203,148,.14);--at:rgba(224,184,104,.16);--rt:rgba(255,90,110,.14);--nt:rgba(127,166,255,.1);--shadow:0 16px 40px rgba(0,0,0,.35)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--navy);outline-offset:3px;border-radius:3px}
+.wrap{max-width:1220px;margin:0 auto;padding:0 clamp(18px,4vw,32px)}
+h1,h2,h3,h4{margin:0;line-height:1.15;letter-spacing:-.015em;font-weight:700}
+h2{font-size:clamp(1.8rem,3.2vw,2.5rem)}
+.eb{font-size:.78rem;font-weight:700;color:var(--red);margin:0 0 .6rem;letter-spacing:.02em}
+.lede{font-size:1.05rem;color:var(--ink2);max-width:66ch;margin:.7rem 0 0}
+.sec{padding:clamp(60px,8vw,104px) 0}
+.soft{background:var(--soft)}
+.btn{display:inline-flex;align-items:center;gap:.5em;padding:.78em 1.25em;border-radius:4px;border:1px solid var(--navy);background:var(--navy);color:#fff;text-decoration:none;font-weight:700;font-size:.93rem;cursor:pointer;transition:background .2s,color .2s}
+:root[data-theme="dark"] .btn{color:#0A1224}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0A1224}}
+.btn:hover{background:var(--navy2);border-color:var(--navy2)}
+.btn.ghost{background:transparent;color:var(--navy)}
+.btn.ghost:hover{background:var(--nt)}
+.btn.sm{padding:.5em .9em;font-size:.84rem}
+.btn svg{width:16px;height:16px}
+.dl{display:inline-flex;align-items:center;gap:.45em;padding:.45em .8em;border:1px solid var(--line2);border-radius:4px;text-decoration:none;font-size:.84rem;font-weight:600;background:var(--card);color:var(--ink);cursor:pointer}
+.dl:hover{border-color:var(--navy)}
+.dl small{color:var(--muted);font-weight:500}
+.dl svg{width:14px;height:14px}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+.nav.s{border-bottom-color:var(--line);box-shadow:0 2px 12px rgba(1,33,105,.05)}
+.nav::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:linear-gradient(90deg,var(--navy) 0 70%,var(--red) 70% 100%);opacity:0;transition:opacity .2s}
+.nav.s::after{opacity:1}
+.nav .wrap{display:flex;align-items:center;gap:14px;height:64px}
+.mark{font-weight:800;font-size:1.12rem;text-decoration:none;color:var(--navy);white-space:nowrap;letter-spacing:-.01em}
+.mark i{font-style:normal;color:var(--red)}
+.nav ul{list-style:none;margin:0 0 0 auto;padding:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.nl{display:block;padding:.4em .7em;text-decoration:none;font-size:.9rem;font-weight:600;color:var(--ink2);white-space:nowrap;border-bottom:2px solid transparent}
+.nav a.nl:hover,.nav a.nl.on{color:var(--navy);border-bottom-color:var(--red)}
+.tt{border:1px solid var(--line2);background:var(--card);color:var(--ink);border-radius:4px;height:34px;padding:0 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;flex:none;font-size:.8rem;font-weight:600}
+.tt svg{width:14px;height:14px}
+@media (max-width:880px){.nav .cvb{display:none}.tt span{display:none}}
+/* hero */
+.hero{padding:calc(64px + clamp(48px,7vw,96px)) 0 clamp(48px,6vw,80px);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:0;top:0;width:44%;height:100%;background:var(--soft);clip-path:polygon(18% 0,100% 0,100% 100%,0 100%)}
+@media (max-width:980px){.hero::before{display:none}}
+.hg{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:center}
+@media (max-width:980px){.hg{grid-template-columns:minmax(0,1fr)}}
+.hero h1{font-size:clamp(2.8rem,6.6vw,5rem);letter-spacing:-.03em;color:var(--navy);line-height:1}
+.hero .rule{width:64px;height:4px;background:var(--red);margin:18px 0}
+.hero .st1{font-size:clamp(1.25rem,2.3vw,1.7rem);font-weight:600;color:var(--ink);max-width:26ch;line-height:1.3}
+.hero .sub{color:var(--ink2);max-width:56ch;margin:1rem 0 1.6rem}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.dayc{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:6px;box-shadow:var(--shadow);padding:18px 18px 10px}
+.dayc h3{font-size:1rem;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.dayc h3 small{font-size:.76rem;color:var(--muted);font-weight:500}
+.dr{all:unset;cursor:pointer;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 6px;border-top:1px solid var(--line);width:calc(100% - 12px)}
+.dr:first-child{border-top:0}
+.dr:hover{background:var(--nt)}
+.dr .tm{font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;font-size:.9rem}
+.dr .ds{font-size:.84rem;color:var(--ink2);line-height:1.35}
+.dr .ds b{display:block;color:var(--ink);font-size:.9rem}
+.dr .dv{font-size:.8rem;font-weight:700;color:var(--ink);background:var(--soft);border:1px solid var(--line);padding:3px 8px;border-radius:3px;white-space:nowrap;font-variant-numeric:tabular-nums}
+#day{margin-top:8px}
+@media (max-width:520px){.dr{grid-template-columns:44px minmax(0,1fr);row-gap:6px}.dr .dv{grid-column:2;justify-self:start;white-space:normal}.hero h1{font-size:2.6rem}.mh h3{font-size:1.2rem}.kpi b{font-size:1.1rem}}
+.mod,.panel,.wb{min-width:0;max-width:100%}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line2);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:.35em .7em;font-weight:600;font-size:.76rem;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+pre.sql{margin:0;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:12px;font-size:.76rem;line-height:1.5;overflow-x:auto;color:var(--ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+/* life cycle */
+.lcs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;counter-reset:lc}
+.lcb{all:unset;cursor:pointer;border:1px solid var(--line);border-top:3px solid var(--line2);border-radius:4px;padding:10px 10px 12px;background:var(--card);font-weight:700;font-size:.84rem;color:var(--ink);line-height:1.3}
+.lcb i{font-style:normal;display:block;font-size:.72rem;color:var(--red);margin-bottom:4px}
+.lcb small{display:block;font-weight:500;font-size:.72rem;color:var(--muted);margin-top:4px}
+.lcb[aria-pressed="true"]{border-top-color:var(--navy);background:var(--nt)}
+.lcb:hover{border-top-color:var(--navy)}
+@media (max-width:980px){.lcs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:520px){.lcs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lcd{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:20px;align-items:center;margin-top:12px;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:4px;padding:16px 18px;background:var(--card)}
+.lcd h3{font-size:1.15rem;color:var(--navy)}
+.lcd p{margin:.3rem 0 0;color:var(--ink2);font-size:.92rem}
+.lcg{display:grid;gap:8px}
+.lcg span{display:block;font-size:.72rem;color:var(--muted);font-weight:700}
+.lcg b{font-size:.9rem;color:var(--ink)}
+@media (max-width:860px){.lcd{grid-template-columns:minmax(0,1fr)}}
+/* skills */
+.skw{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.skw{grid-template-columns:minmax(0,1fr)}}
+.skg{margin-bottom:16px}
+.skg h3{font-size:.95rem;color:var(--navy);margin-bottom:8px}
+.skc{display:flex;flex-wrap:wrap;gap:6px}
+.skc .chip{border:1px solid var(--line2);background:var(--card);color:var(--ink);border-radius:3px;padding:.38em .75em;font-size:.82rem;font-weight:600;cursor:pointer;text-align:left}
+.skc .chip:hover{border-color:var(--navy)}
+.skc .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+#skev{position:sticky;top:84px;border:1px solid var(--line);border-top:4px solid var(--red);border-radius:4px;padding:14px 16px;background:var(--card);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+#skev .evb{text-align:left}
+.dayn{font-size:.76rem;color:var(--muted);margin:8px 6px 4px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:clamp(40px,6vw,64px);position:relative;background:var(--bg)}
+.facts div{padding:16px 18px}
+.facts div+div{border-left:1px solid var(--line)}
+.facts b{display:block;font-size:clamp(1.5rem,2.6vw,2rem);color:var(--navy);font-variant-numeric:tabular-nums;font-weight:800}
+.facts span{font-size:.84rem;color:var(--muted);line-height:1.4;display:block}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.facts div:nth-child(3){border-left:0}.facts div:nth-child(n+3){border-top:1px solid var(--line)}}
+/* principles */
+.pr{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card)}
+.pr div{padding:20px 20px 22px;position:relative}
+.pr div+div{border-left:1px solid var(--line)}
+.pr b{display:block;font-size:1.02rem;color:var(--navy);margin-bottom:6px}
+.pr span{font-size:.9rem;color:var(--ink2);line-height:1.5}
+.pr i{font-style:normal;font-size:.72rem;font-weight:800;color:var(--red);display:block;margin-bottom:8px}
+@media (max-width:900px){.pr{grid-template-columns:1fr 1fr}.pr div:nth-child(3){border-left:0}.pr div:nth-child(n+3){border-top:1px solid var(--line)}}
+@media (max-width:560px){.pr{grid-template-columns:1fr}.pr div+div{border-left:0;border-top:1px solid var(--line)}}
+/* workbench */
+.wb{border:1px solid var(--line);border-radius:6px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.wb-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--line);background:var(--soft);scrollbar-width:thin}
+.wb-tabs button{border:0;background:transparent;padding:.95em 1.15em;font-weight:600;font-size:.9rem;color:var(--ink2);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;display:flex;gap:8px;align-items:center}
+.wb-tabs button i{font-style:normal;font-size:.72rem;color:var(--muted);border:1px solid var(--line2);border-radius:3px;padding:0 5px}
+.wb-tabs button[aria-selected="true"]{background:var(--card);color:var(--navy);border-bottom-color:var(--red)}
+.mod{padding:clamp(16px,2.4vw,26px)}
+.mod[hidden]{display:none}
+.mh{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:14px}
+.mh h3{font-size:1.4rem;color:var(--navy)}
+.mhr{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.dl.xl{border-color:var(--up);color:var(--up)}
+.mh p{margin:.35rem 0 0;color:var(--ink2);font-size:.93rem;max-width:80ch}
+.lab{font-size:.72rem;font-weight:700;padding:3px 9px;border:1px solid var(--line2);border-radius:3px;color:var(--muted);white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi{border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:4px;padding:10px 12px;background:var(--card);min-width:0}
+.kpi span{display:block;font-size:.74rem;color:var(--muted);font-weight:600}
+.kpi b{display:block;font-size:1.3rem;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800}
+.kpi small{font-size:.72rem;color:var(--muted)}
+.kpi b.u,.kpi b.g{color:var(--up)} .kpi b.d{color:var(--dn)} .kpi b.a{color:var(--gold)}
+.mg{display:grid;grid-template-columns:250px minmax(0,1fr);gap:14px;align-items:start}
+.mg2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:1060px){.mg,.mg2{grid-template-columns:minmax(0,1fr)}}
+.panel{border:1px solid var(--line);border-radius:6px;padding:12px 14px;background:var(--card);min-width:0}
+.panel+.panel{margin-top:12px}
+.pt{font-weight:700;font-size:.92rem;margin:0;color:var(--ink)}
+.ps{font-size:.78rem;color:var(--muted);margin:2px 0 8px}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}
+.g2>.panel+.panel{margin-top:0}
+@media (max-width:820px){.g2{grid-template-columns:minmax(0,1fr)}}
+.ctl{margin:0 0 11px}
+.ctl label{display:flex;justify-content:space-between;gap:8px;font-size:.8rem;color:var(--ink2);margin-bottom:2px}
+.ctl output{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--navy);margin:0}
+.chk{display:flex;align-items:center;gap:8px;font-size:.84rem;color:var(--ink);margin:6px 0;cursor:pointer}
+.chk input{accent-color:var(--navy);width:16px;height:16px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.tw{overflow-x:auto}
+table.t{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums}
+table.t th,table.t td{padding:7px 8px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:top}
+table.t th:first-child,table.t td:first-child{text-align:left}
+table.t th{font-size:.72rem;color:var(--muted);font-weight:700;background:var(--soft)}
+table.t tr.tot td{font-weight:800;border-top:1.5px solid var(--ink2)}
+table.t tr.sub2 td{color:var(--muted)}
+table.t td.neg{color:var(--dn)}
+table.t .sub{display:block;font-size:.72rem;color:var(--muted);font-weight:500}
+.red{color:var(--dn)}
+#cT td:nth-child(2),#cT th:nth-child(2),#cT td:nth-child(7),#cT th:nth-child(7){text-align:left}
+#sT td,#sT th{text-align:left}#sT td:nth-child(7),#sT th:nth-child(7){text-align:right}
+#tT td,#tT th{text-align:left}#tT td:nth-child(4),#tT th:nth-child(4){text-align:right}
+#aTb td:last-child,#aTb th:last-child{text-align:left}
+#gT td:nth-child(6),#gT th:nth-child(6){text-align:left}#gT td:nth-child(7),#gT th:nth-child(7){text-align:center}
+.st{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:3px;white-space:nowrap}
+.st.g{background:var(--gt);color:var(--up)}.st.a{background:var(--at);color:var(--gold)}.st.d{background:var(--rt);color:var(--dn)}.st.n{background:var(--soft);color:var(--muted);border:1px solid var(--line)}
+.mini{border:1px solid var(--navy);background:transparent;color:var(--navy);border-radius:3px;padding:2px 9px;font-size:.76rem;font-weight:700;cursor:pointer}
+.mini:hover{background:var(--nt)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font-family:var(--f);font-size:11px;fill:var(--muted)}
+.lg{display:flex;flex-wrap:wrap;gap:12px;font-size:.76rem;color:var(--muted);margin-top:6px}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.nt{font-size:.76rem;color:var(--muted);margin:.5rem 0 0;line-height:1.5}
+.memo p{margin:.45em 0;padding:8px 10px;border-left:3px solid var(--navy);background:var(--soft);font-size:.9rem;color:var(--ink)}
+.memo p.warn{border-left-color:var(--red);background:var(--rt)}
+.log{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.76rem;background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:10px 12px;max-height:380px;overflow:auto;line-height:1.6;color:var(--ink)}
+.log .ok{color:var(--up)} .log .w{color:var(--gold)} .log .x{color:var(--dn)}
+.mcbox{margin-top:6px}
+.g2g{border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:4px;padding:10px 12px;margin:10px 0;background:var(--card)}
+.g2g.r{border-left-color:var(--dn)}
+.g2g h4{font-size:.95rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.g2g p{margin:.4em 0 0;font-size:.88rem;color:var(--ink2)}
+/* T+1 feature */
+.t1{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(20px,3vw,32px)}.t1>div:first-child{max-width:820px}
+@media (max-width:980px){.t1{grid-template-columns:1fr}}
+.t1 ul{margin:.8rem 0 0;padding-left:1.1em;color:var(--ink2)}
+.t1 li{margin:.4em 0}
+.watch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+.watch div{border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:4px;padding:12px 14px;background:var(--card)}
+.watch b{display:block;font-size:.95rem;color:var(--ink)}
+.watch span{font-size:.84rem;color:var(--ink2)}
+@media (max-width:960px){.watch{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.watch{grid-template-columns:1fr}}
+/* experience */
+.exp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,56px)}
+@media (max-width:900px){.exp{grid-template-columns:minmax(0,1fr)}}
+.exp .role{font-size:1.35rem;font-weight:700;color:var(--navy)}
+.exp .meta{color:var(--muted);font-size:.92rem;margin:.2rem 0 1rem}
+.xl{list-style:none;margin:0;padding:0}
+.xl li{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+.xl li:first-child{border-top:0}
+.xl li p{margin:0;color:var(--ink2)}
+.xl li p b{color:var(--ink)}
+.xl li span{font-size:.78rem;color:var(--navy);font-weight:700;background:var(--nt);border-radius:3px;padding:4px 8px;align-self:start;justify-self:start}
+@media (max-width:640px){.xl li{grid-template-columns:1fr}}
+/* work */
+.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:980px){.wg{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.wg{grid-template-columns:1fr}}
+.wk{border:1px solid var(--line);border-top:3px solid var(--navy);border-radius:4px;padding:18px;background:var(--card);display:flex;flex-direction:column;gap:8px;transition:box-shadow .25s,transform .25s}
+.wk:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.wk .k{font-size:.72rem;font-weight:700;color:var(--red)}
+.wk h3{font-size:1.15rem;color:var(--ink)}
+.wk p{margin:0;font-size:.9rem;color:var(--ink2)}
+.wm{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:auto;padding-top:8px}
+.wm div{background:var(--soft);border-radius:3px;padding:7px 8px}
+.wm b{display:block;font-size:1rem;color:var(--navy);font-variant-numeric:tabular-nums}
+.wm span{font-size:.7rem;color:var(--muted);line-height:1.3;display:block}
+.wd{display:flex;gap:6px;flex-wrap:wrap}
+.xp{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,48px);align-items:center}
+@media (max-width:900px){.xp{grid-template-columns:minmax(0,1fr)}}
+.xp .meta{color:var(--muted);font-size:.9rem;margin:.3rem 0 0}
+.xph{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.xb{display:grid;grid-template-columns:140px minmax(0,1fr) 150px;gap:10px;align-items:center;margin:10px 0}
+.xb .lb{font-size:.84rem;font-weight:600;color:var(--ink)}
+.xb .tr{display:grid;gap:4px}
+.xb .br{height:12px;border-radius:2px;width:0;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.xb .br.b0{background:var(--line2)}.xb .br.b1{background:var(--navy)}
+.xb .vv{font-size:.78rem;color:var(--muted);text-align:right;line-height:1.3}
+.xb .vv b{display:block;color:var(--up);font-size:.95rem}
+@media (max-width:520px){.xb{grid-template-columns:minmax(0,1fr) 76px}.xb .lb{grid-column:1/-1}}
+.xpk{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.xpk div{background:var(--soft);border-radius:4px;padding:8px 10px}
+.xpk b{display:block;color:var(--navy);font-size:1.05rem}
+.xpk span{font-size:.74rem;color:var(--muted);line-height:1.3;display:block}
+.ops{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card)}
+.op{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr) minmax(0,.8fr) auto;gap:12px;align-items:center;padding:11px 16px;border-top:1px solid var(--line)}
+.op:first-child{border-top:0}
+.op b{font-size:.93rem;color:var(--ink)}
+.op small{display:block;color:var(--muted);font-size:.78rem}
+.op .tl{font-size:.8rem;color:var(--ink2)}
+.op .fg{font-size:.82rem;font-weight:700;color:var(--navy)}
+@media (max-width:760px){.op{grid-template-columns:minmax(0,1fr) auto}.op .tl,.op .fg{grid-column:1;font-size:.78rem}}
+.creds2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.creds2 div{border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:var(--card);display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.creds2 b{font-size:.9rem}
+.creds2 small{display:block;color:var(--muted);font-size:.76rem}
+@media (max-width:640px){.creds2{grid-template-columns:minmax(0,1fr)}}
+.dx{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(20px,4vw,40px);align-items:start;margin-top:clamp(36px,5vw,56px);padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--line)}
+@media (max-width:900px){.dx{grid-template-columns:minmax(0,1fr)}}
+.dx h3{font-size:clamp(1.3rem,2.2vw,1.7rem);color:var(--navy)}
+.dxn{margin-top:10px;border-left:3px solid var(--red);background:var(--card);padding:10px 12px;font-size:.88rem;color:var(--ink2);border-radius:0 4px 4px 0}
+.dxn b{color:var(--ink)}
+.gh{font-size:1.25rem;color:var(--navy);margin:clamp(36px,5vw,52px) 0 16px;padding-top:18px;border-top:1px solid var(--line)}
+/* ledger, about */
+.ledger{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--card)}
+.ledger .row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 110px;gap:12px;align-items:center;padding:11px 16px;border-top:1px solid var(--line)}
+.ledger .row:first-child{border-top:0}
+.ledger .hd{background:var(--soft);font-size:.72rem;font-weight:700;color:var(--muted)}
+.ledger b{font-weight:700;font-size:.93rem}
+.ledger small{display:block;color:var(--muted);font-size:.8rem}
+.ledger .wc{color:var(--ink2);font-size:.88rem}
+.vf{font-size:.82rem;font-weight:700;color:var(--navy)}
+.ledger .row.grp{background:var(--soft);font-size:.74rem;font-weight:800;color:var(--navy);padding-top:8px;padding-bottom:8px;grid-template-columns:1fr}
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 0;padding:0}
+.chips li{font-size:.78rem;font-weight:600;color:var(--navy);background:var(--nt);border:1px solid var(--line);border-radius:3px;padding:4px 9px}
+.wk .k{display:flex;justify-content:space-between;gap:8px}
+.wk .k em{font-style:normal;color:var(--muted);font-weight:600}
+.live-go{border-color:var(--navy);color:var(--navy)}
+@media (max-width:720px){.ledger .row{grid-template-columns:1fr auto}.ledger .row .wc{grid-column:1/-1;order:3}.ledger .hd{display:none}.ledger .row>:nth-child(4){display:none}}
+.about{display:grid;grid-template-columns:190px minmax(0,1fr) minmax(0,.9fr);gap:clamp(22px,4vw,48px);align-items:start}
+@media (max-width:960px){.about{grid-template-columns:minmax(0,1fr)}}
+.pic{width:190px;aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--soft);border-bottom:4px solid var(--red)}
+.pic img{width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+.about p{color:var(--ink2)}
+.kv{list-style:none;margin:0;padding:0}
+.kv li{padding:10px 0;border-top:1px solid var(--line);font-size:.92rem}
+.kv li:first-child{border-top:0}
+.kv small{display:block;color:var(--muted)}
+.contact{background:var(--navy);color:#fff}
+:root[data-theme="dark"] .contact{background:#0E1F4D}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .contact{background:#0E1F4D}}
+.contact h2{color:#fff}
+.contact .eb{color:#FF8A98}
+.contact .lede{color:#D5DDF0}
+.ways{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.4rem}
+.ways a{display:inline-flex;align-items:center;padding:.75em 1.15em;border-radius:4px;border:1px solid rgba(255,255,255,.4);color:#fff;text-decoration:none;font-weight:600}
+.ways a:hover{background:rgba(255,255,255,.1)}
+.ways a.p{background:#fff;color:#012169;border-color:#fff}
+.cq{margin-top:1.4rem}
+footer{background:#00164A;color:#AFBCD9;font-size:.8rem}
+footer .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding-top:14px;padding-bottom:20px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140px);background:var(--ink);color:var(--bg);padding:.6em 1.1em;border-radius:4px;font-size:.9rem;z-index:90;transition:transform .3s,visibility .3s;visibility:hidden}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+</style>
+<style>#experience,#skills,#about,#contact{display:none!important}
+.nl.back{font-weight:700}
+</style>
+<style>:root[data-theme="dark"] .btn.ghost{color:var(--navy)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.ghost{color:var(--navy)}}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],:root[data-theme="dark"] .skc .chip[aria-pressed="true"]{color:#0A1224}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"],:root:not([data-theme="light"]) .skc .chip[aria-pressed="true"]{color:#0A1224}}</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-dl" viewBox="0 0 16 16"><path d="M8 2v8m0 0L4.8 6.8M8 10l3.2-3.2M3 13h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol></svg>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="mark" href="index.html">Tarana Bansal<i>.</i></a>
+  <ul>
+    <li><a class="nl back" href="index.html">← Main portfolio</a></li>
+    <li><a class="nl" href="#lifecycle">Life cycle</a></li>
+    <li><a class="nl" href="#t1">Markets</a></li>
+    <li><a class="nl" href="#work">Projects</a></li>
+  </ul>
+  <a class="btn sm cvb" href="Tarana_Bansal_Resume.pdf" download data-file="resume"><svg><use href="#i-dl"/></svg>Résumé</a>
+  <button class="tt" id="tt" aria-label="Switch between light and dark mode"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></svg><span id="ttL">Dark</span></button>
+</div></header>
+
+<main>
+<section class="hero" id="top"><div class="wrap">
+  <div class="hg">
+    <div>
+      <p class="eb">TARANA BANSAL · LIVE MODELS</p>
+      <h1 style="font-size:clamp(2.3rem,5vw,4rem);line-height:1.05">Markets operations workbench</h1>
+      <div class="rule"></div>
+      <p class="st1">Every trade explained. Every break closed. Every number right before the open.</p>
+      <p class="sub">A bank's markets back office rebuilt as seven working models, from the morning collateral run to the evening governance pack. All data is synthetic; select any step of the day to open it.</p>
+      <div class="ctas"><a class="btn" href="#workbench">Open the live models</a><a class="btn ghost" href="Tarana_Bansal_Resume.pdf" download data-file="resume"><svg><use href="#i-dl"/></svg>Résumé</a></div>
+    </div>
+    <div class="dayc rv">
+      <h3>An operating day <small>IST, across Asian, London and New York hours</small></h3>
+      <div id="day"></div>
+      <p class="dayn">Live figures from the workbench below. Select a step to open it.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="lifecycle" style="padding-bottom:clamp(20px,3vw,32px)"><div class="wrap">
+  <div class="rv" style="margin-bottom:20px"><p class="eb">THE TRADE LIFE CYCLE</p><h2>Where every function fits</h2><p class="lede">From onboarding to reporting: what happens at each stage, what can go wrong and the control that catches it. Select a stage.</p></div>
+  <div class="lcs" id="lcs"></div><div class="lcd" id="lcd"></div>
+</div></section>
+
+<section class="sec soft" id="t1"><div class="wrap">
+  <div class="t1">
+    <div class="rv"><p class="eb">MARKETS AND DERIVATIVES</p><h2>Europe settles in one day from 11 October 2027</h2>
+      <p class="lede">The EU, the UK and Switzerland move from T+2 to T+1 together. For teams in India supporting European settlements, the window to match, fund and fix a trade shrinks from a day and a half to a single evening.</p>
+      <ul><li><b>Match on trade date:</b> allocations, confirmations and settlement instructions must be complete the same evening, not the next day.</li><li><b>Fund and borrow earlier:</b> cash for cross-currency trades and securities for short deliveries have to be in place overnight.</li><li><b>Fails cost more:</b> with no second day to recover, unmatched trades fail and accrue CSDR cash penalties.</li><li><b>Automation decides it:</b> straight-through processing and clean standing settlement instructions become the difference between settling and failing.</li></ul>
+      <p class="nt">Certain securities financing transactions are exempt in the EU. The US moved to T+1 in May 2024.</p></div>
+    <div class="panel rv"><p class="pt">A London trade, seen from India</p><p class="ps">London trading hours are roughly 13:30 to 21:00 IST in summer. Under T+1, instructions must be matched the same evening</p><svg class="chart" id="t1c" viewBox="0 0 760 190" role="img" aria-label="T+2 versus T+1 timeline"></svg></div>
+  </div>
+  <div class="dx rv">
+    <div><p class="eb" style="margin-bottom:.3rem">DERIVATIVES IN ONE PICTURE</p><h3>The products behind every margin call and P&amp;L line</h3><p class="lede" style="font-size:.95rem">Pick a product and move the terms. The note under the chart says where operations meets it.</p>
+      <div class="seg" id="dxP" style="margin:12px 0"></div><div id="dxIn"></div><div class="dxn" id="dxN"></div></div>
+    <div class="panel"><p class="pt" id="dxT"></p><p class="ps" id="dxS"></p><svg class="chart" id="dxC" viewBox="0 0 520 280" role="img" aria-label="Payoff chart"></svg></div>
+  </div>
+  <div class="watch rv">
+    <div><b>Settlement discipline</b><span>CSDR cash penalties on every failing instruction since February 2022, priced by instrument type.</span></div>
+    <div><b>Uncleared margin</b><span>Initial margin rules for non-centrally cleared derivatives, fully phased in by September 2022; SIMM is the industry model.</span></div>
+    <div><b>Benchmarks</b><span>USD LIBOR ended in June 2023; SOFR now anchors dollar swaps and floating-rate collateral terms.</span></div>
+    <div><b>Treasury clearing</b><span>The US is moving cash Treasury and repo trades into central clearing, reshaping margin and collateral flows.</span></div>
+  </div>
+</div></section>
+
+<section class="sec" id="work"><div class="wrap">
+  <div class="rv" style="margin-bottom:26px"><p class="eb">PROJECTS</p><h2>Projects</h2><p class="lede">The three on my résumé, followed by seven markets operations projects you can run.</p></div>
+  <div class="wg" id="work-grid"></div>
+  <div id="workbench" style="scroll-margin-top:76px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin:clamp(40px,5vw,56px) 0 18px;padding-top:22px;border-top:1px solid var(--line)"><div><p class="eb">MARKETS OPERATIONS PROJECTS</p><h3 style="font-size:clamp(1.4rem,2.4vw,1.9rem);color:var(--navy)">Seven live models, one for each function</h3><p class="lede" style="font-size:.95rem">Built on synthetic data. Change the inputs and follow the numbers through.</p></div><p style="font-size:.8rem;color:var(--muted);margin:0">Keys 1 to 7 switch models</p></div>
+  <div class="wb">
+    <div class="wb-tabs" role="tablist">
+      <button role="tab" data-m="col" aria-selected="true"><i>1</i>Collateral and margin</button>
+      <button role="tab" data-m="pnl" aria-selected="false"><i>2</i>P&amp;L explain</button>
+      <button role="tab" data-m="rec" aria-selected="false"><i>3</i>Trade reconciliation</button>
+      <button role="tab" data-m="str" aria-selected="false"><i>4</i>Structured trade review</button>
+      <button role="tab" data-m="set" aria-selected="false"><i>5</i>Settlements</button>
+      <button role="tab" data-m="ast" aria-selected="false"><i>6</i>Asset servicing</button>
+      <button role="tab" data-m="met" aria-selected="false"><i>7</i>Metric governance</button>
+    </div>
+    <div class="mod" data-m="col" id="m-col"></div>
+    <div class="mod" data-m="pnl" id="m-pnl" hidden></div>
+    <div class="mod" data-m="rec" id="m-rec" hidden></div>
+    <div class="mod" data-m="str" id="m-str" hidden></div>
+    <div class="mod" data-m="set" id="m-set" hidden></div>
+    <div class="mod" data-m="ast" id="m-ast" hidden></div>
+    <div class="mod" data-m="met" id="m-met" hidden></div>
+  </div>
+  </div>
+
+</div></section>
+
+<section class="sec soft" id="experience" style="padding:clamp(48px,6vw,80px) 0"><div class="wrap">
+  <div class="xp">
+    <div class="rv"><p class="eb">EXPERIENCE</p><h2 style="font-size:clamp(1.6rem,2.8vw,2.1rem)">Revenue Assurance, Paytm</h2><p class="meta">One97 Communications, Noida · April to June 2026</p><p style="color:var(--ink2);margin:.6rem 0 1rem">Reconciliation, exception monitoring and control automation for B2B receivables. The detail is on my résumé; this is the impact.</p><a class="dl" href="Tarana_Bansal_Paytm_Internship_Report.pdf" download data-file="report"><svg><use href="#i-dl"/></svg>Internship report <small>PDF</small></a></div>
+    <div class="xpd panel"><div class="xph"><p class="pt">Time taken, before and after automation</p><p class="ps" style="margin:0">Grey: before · Navy: after</p></div><div id="xpB"></div>
+      <div class="xpk"><div><b>Daily</b><span>exception monitoring, from month-end</span></div><div><b>100%</b><span>consistent MIS format</span></div><div><b>2 teams</b><span>adopted the frameworks</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="skills"><div class="wrap">
+  <div class="rv" style="margin-bottom:22px"><p class="eb">SKILLS</p><h2>Skills, with the evidence</h2><p class="lede">Select any skill to see where it shows on this page.</p></div>
+  <div class="skw"><div id="sk"></div><aside id="skev" aria-live="polite"></aside></div>
+  <div id="credentials" style="margin-top:clamp(44px,6vw,64px);scroll-margin-top:80px"><p class="eb">CREDENTIALS</p><h3 style="font-size:1.6rem;margin-bottom:16px;color:var(--navy)">Certifications and simulations</h3><div class="creds2" id="ledger"></div></div>
+</div></section>
+
+<section class="sec" id="about"><div class="wrap">
+  <div class="about">
+    <div class="pic"><img src="data:image/webp;base64,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" alt="Tarana Bansal" loading="lazy"></div>
+    <div class="rv"><p class="eb">ABOUT</p><h2 style="font-size:clamp(1.6rem,2.8vw,2.2rem)">Curious, perceptive, steady under pressure</h2>
+      <p style="margin-top:1rem">I genuinely enjoy talking to people, and I ask a lot of questions: not only for the answer, but to understand how different people see the same situation. That is why I chose English Honours at Delhi University, and why I then wanted the other side of the coin: how markets, numbers and systems actually work.</p>
+      <p>I learn by building. I've built a working D2C fashion brand with its own finance studio, and the tools on this page, to understand processes end to end rather than from the outside. I follow global markets and commodities closely and I'm comfortable working to global market hours.</p>
+      <p>Off the clock: reading, and badminton, for its instant feedback and clear scoreboard.</p></div>
+    <div><p class="eb">EDUCATION AND LEADERSHIP</p><ul class="kv">
+      <li>PGDM, Finance and Analytics<small>Great Lakes Institute of Management, Gurgaon, 2027</small></li>
+      <li>B.A. (Hons) English<small>Maharaja Agrasen College, University of Delhi, 2024</small></li>
+      <li>Treasurer, Self Interest Club<small>Budgeting and financial oversight</small></li>
+      <li>Logistics lead, 3-day cultural festival<small>2,000+ attendees</small></li>
+      <li>Top 15, Crest x Grant Thornton case competition<small>Great Lakes Gurgaon</small></li>
+      <li>Academic Excellence Award<small>Subject topper in IP (Class XII) and English (Class X)</small></li>
+      <li>Taught AI and coding fundamentals<small>Class 7 students, APS Noida</small></li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec contact" id="contact"><div class="wrap">
+  <p class="eb">CONTACT</p><h2>Let's talk.</h2>
+  <p class="lede">I would be glad to walk you through any tool on this page, or the reconciliations behind my internship.</p>
+  <div class="cq"><div class="ways"><a class="p" href="mailto:tarana.pgdm27g@greatlakes.edu.in">tarana.pgdm27g@greatlakes.edu.in</a><a href="tel:+919958262885">+91 99582 62885</a><a href="https://www.linkedin.com/in/tarana-bansal-030769209" target="_blank" rel="noopener">LinkedIn</a><a href="Tarana_Bansal_Resume.pdf" download data-file="resume">Download résumé</a></div></div>
+</div></section>
+</main>
+<footer><div class="wrap"><span>Tarana Bansal</span><span>All workbench data is synthetic and for demonstration. Company and counterparty names are fictional.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/* ===== core helpers ===== */
+const NS="http://www.w3.org/2000/svg";
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function el(t,a,p){const e=document.createElementNS(NS,t);if(a)for(const k in a){const v=a[k];if(k==="fill"||k==="stroke")e.style[k]=v;else e.setAttribute(k,v)}if(p)p.appendChild(e);return e}
+function tx(p,x,y,s,a){const t=el("text",Object.assign({x,y},a||{}),p);t.textContent=s;return t}
+const grp=(n,d)=>Number(n).toLocaleString("en-US",{minimumFractionDigits:d||0,maximumFractionDigits:d||0});
+function usd(x,d){const a=Math.abs(x),s=x<0?"−":"";if(a>=1e6)return s+"$"+grp(a/1e6,d==null?2:d)+"m";if(a>=1e3)return s+"$"+grp(a/1e3,d==null?0:d)+"k";return s+"$"+grp(a,0)}
+function ccy(x,c,d){const a=Math.abs(x),s=x<0?"−":"",sym=c==="GBP"?"£":c==="EUR"?"€":"$";if(a>=1e6)return s+sym+grp(a/1e6,d==null?2:d)+"m";if(a>=1e3)return s+sym+grp(a/1e3,d==null?1:d)+"k";return s+sym+grp(a,2)}
+const pc=(n,d)=>(n<0?"−":"")+grp(Math.abs(n),d==null?1:d)+"%";
+const sgn=x=>(x>0?"+":x<0?"−":"")+"";
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2400)}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function gauss(R){let u=0,v=0;while(!u)u=R();while(!v)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+function sliders(box,specs,state,on){box.insertAdjacentHTML("beforeend",specs.map(s=>`<div class="ctl"><label for="${box.id}-${s[0]}">${s[1]}<output id="${box.id}-o-${s[0]}"></output></label><input type="range" id="${box.id}-${s[0]}" min="${s[2]}" max="${s[3]}" step="${s[4]}" value="${state[s[0]]}"></div>`).join(""));
+  const upd=()=>specs.forEach(s=>{state[s[0]]=+$("#"+box.id+"-"+s[0]).value;$("#"+box.id+"-o-"+s[0]).textContent=s[5](state[s[0]])});
+  specs.forEach(s=>$("#"+box.id+"-"+s[0]).addEventListener("input",()=>{upd();on()}));upd()}
+function kpis(box,arr){box.innerHTML=arr.map(k=>`<div class="kpi"><span>${k[0]}</span><b class="${k[3]||""}">${k[1]}</b>${k[2]?`<small>${k[2]}</small>`:""}</div>`).join("")}
+function heat(v,lo,hi){const t=Math.max(0,Math.min(1,(v-lo)/((hi-lo)||1)));const a=[227,24,55],b=[30,122,82];return `rgba(${Math.round(a[0]+(b[0]-a[0])*t)},${Math.round(a[1]+(b[1]-a[1])*t)},${Math.round(a[2]+(b[2]-a[2])*t)},.16)`}
+function axisY(svg,min,max,L,R,T,B,W,f){const span=max-min||1;const st=(()=>{const raw=span/4,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<2?1:m<5?2:5)*p})();const y=v=>T+(max-v)/span*(B-T);
+  for(let v=Math.ceil(min/st)*st;v<=max+1e-9;v+=st){el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:"var(--line)"},svg);tx(svg,L-6,y(v)+4,f(v),{"text-anchor":"end"})}return y}
+function tag(t,c){return `<span class="st ${c}">${t}</span>`}
+
+/* downloads */
+const FILES={resume:"Tarana_Bansal_Resume.pdf",report:"Tarana_Bansal_Paytm_Internship_Report.pdf",wm_model:"Portfolio_Optimisation_Model.xlsx",wm_deck:"Portfolio_Optimisation_Deck.pptx",ccm_pdf:"CCM_Project_Deck.pdf",xl_col:"Collateral_Margin_Call_Tracker.xlsx",xl_pnl:"PnL_Attribution_Model.xlsx",xl_rec:"Trade_Break_Reconciliation.xlsx"};
+const MIME={pdf:"application/pdf",xlsx:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",pptx:"application/vnd.openxmlformats-officedocument.presentationml.presentation"};
+let cap;function getCap(){if(cap!==undefined)return cap;cap=(window.claude&&typeof window.claude.use==="function")?window.claude.use("downloads").catch(()=>null):Promise.resolve(null);return cap}
+async function save(name,blob){const c=await getCap();if(c){try{await c.save({filename:name,data:blob});toast("Saved "+name);return}catch(e){if(e&&e.code==="declined")return}}
+  const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+document.addEventListener("click",e=>{const a=e.target.closest("[data-file]");if(!a)return;const n=document.getElementById("blob-"+a.dataset.file);if(!n)return;e.preventDefault();
+  const b=atob(n.textContent.trim());const u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);const f=FILES[a.dataset.file];save(f,new Blob([u],{type:MIME[f.split(".").pop()]}))});
+
+/* nav, theme, reveal */
+addEventListener("scroll",()=>$("#nav").classList.toggle("s",scrollY>8),{passive:true});
+const nl=$$(".nav a.nl");const nio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)nl.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-45% 0px -50% 0px"});$$("main section[id]").forEach(s=>nio.observe(s));
+function curTheme(){return document.documentElement.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}
+function setTL(){$("#ttL").textContent=curTheme()==="dark"?"Light":"Dark"}
+try{const t=localStorage.getItem("tb_gmo_theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}
+setTL();
+$("#tt").addEventListener("click",()=>{const n=curTheme()==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",n);try{localStorage.setItem("tb_gmo_theme",n)}catch(e){}setTL()});
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target)}}),{threshold:.1});$$(".rv").forEach(x=>ro.observe(x));
+
+/* workbench tabs */
+const MODS={},ENG={};const inited={};
+function openMod(k){$$(".wb-tabs button").forEach(b=>b.setAttribute("aria-selected",b.dataset.m===k?"true":"false"));$$(".mod").forEach(d=>d.hidden=d.dataset.m!==k);if(!inited[k]&&MODS[k]){inited[k]=1;MODS[k]($("#m-"+k))}}
+$$(".wb-tabs button").forEach(b=>b.addEventListener("click",()=>openMod(b.dataset.m)));
+document.addEventListener("keydown",e=>{if(e.target.closest("input,select,textarea")||e.metaKey||e.ctrlKey||e.altKey)return;const m=["col","pnl","rec","str","set","ast","met"][+e.key-1];if(m){openMod(m);const s=$("#workbench").getBoundingClientRect();if(s.top>innerHeight||s.bottom<0)$("#workbench").scrollIntoView({behavior:RM?"auto":"smooth"})}});
+
+/* ===== 1. Collateral and margin ===== */
+const CPTY=[
+ {n:"Aldridge Capital",t:"Hedge fund",p:"Rates swaps",e:184e6,s:{r:-450e3,f:0,q:0,c:0},thr:0,mta:.5e6,rnd:.1e6,b:150e6,their:1e6,el:["cash","ust","bund"]},
+ {n:"Northbay Pension Fund",t:"Pension",p:"Rates swaps",e:-220e6,s:{r:600e3,f:0,q:0,c:0},thr:0,mta:.5e6,rnd:.1e6,b:-195e6,their:-.5e6,el:["cash","ust","bund"]},
+ {n:"Kestrel Macro Fund",t:"Hedge fund",p:"FX forwards",e:63e6,s:{r:0,f:1.8e6,q:0,c:0},thr:10e6,mta:.5e6,rnd:.1e6,b:52.7e6,their:0,el:["cash","ust"]},
+ {n:"Harbour Insurance",t:"Insurer",p:"Equity options",e:112e6,s:{r:0,f:0,q:3.2e6,c:0},thr:20e6,mta:1e6,rnd:.1e6,b:60e6,their:-19e6,el:["cash","ust","bund","corp"]},
+ {n:"Solent Asset Management",t:"Asset manager",p:"Repo",e:-48e6,s:{r:50e3,f:0,q:0,c:0},thr:0,mta:.25e6,rnd:.1e6,b:-56e6,their:0,el:["cash","ust","bund","corp","eq"]},
+ {n:"Meridian Bank",t:"Bank",p:"Rates and FX",e:21e6,s:{r:-200e3,f:500e3,q:0,c:0},thr:100e6,mta:1e6,rnd:.1e6,b:0,their:0,el:["cash","ust","bund"]},
+ {n:"Tarn Energy Trading",t:"Commodity trader",p:"Commodity swaps",e:145e6,s:{r:0,f:0,q:0,c:4e6},thr:30e6,mta:.5e6,rnd:.1e6,b:90e6,their:1.5e6,el:["cash","ust"]},
+ {n:"Vale Corporate Treasury",t:"Corporate",p:"FX forwards",e:-32e6,s:{r:0,f:-1.5e6,q:0,c:0},thr:20e6,mta:1e6,rnd:.1e6,b:0,their:0,el:["cash"]}];
+const INV=[["cash","Cash (USD)",0,45,400e6],["ust","US Treasuries",1,12,300e6],["bund","German Bunds",2,15,150e6],["corp","IG corporate bonds",8,30,200e6],["eq","Main-index equities",15,60,250e6]];
+const COLDEF={r:0,f:0,q:0,c:0,tol:5};
+function colRun(st){const out=CPTY.map(c=>{const E=c.e+c.s.r*st.r+c.s.f*st.f+c.s.q*st.q+c.s.c*st.c;
+    const target=x=>x>0?Math.max(0,x-c.thr):-Math.max(0,-x-c.thr);const mv=target(E)-c.b,their=target(E+c.their)-c.b;
+    const round=(m,up)=>{const q=Math.round(Math.abs(m)/c.rnd*1e6)/1e6;return (up?Math.ceil(q):Math.floor(q))*c.rnd*Math.sign(m)};
+    let dir,amt=0,status,cls,undis=0;
+    if(Math.abs(mv)<c.mta){dir="None";status=Math.abs(target(E))<1?"Under threshold":"Below MTA";cls="n"}
+    else{if(mv>0){if(c.b<0){dir="Recall from counterparty";amt=round(mv,false)}else{dir="We call";amt=round(mv,true)}}else{if(c.b>0){dir="Return to counterparty";amt=round(mv,false)}else{dir="Counterparty calls us";amt=round(mv,true)}}
+      const diff=Math.abs(mv-their),tolAbs=Math.max(st.tol/100*Math.abs(E),.5e6);if(diff>tolAbs){status="Disputed";cls="d";undis=Math.sign(mv)*Math.min(Math.abs(mv),Math.abs(their))}else{status="Agreed";cls="g"}}
+    return Object.assign({},c,{E,mv,amt,dir,status,cls,undis})});
+  const inflow=out.filter(o=>o.amt>0).reduce((s,o)=>s+o.amt,0),outflow=out.filter(o=>o.amt<0).reduce((s,o)=>s-o.amt,0);
+  return {out,calls:out.filter(o=>o.dir!=="None").length,disputes:out.filter(o=>o.status==="Disputed").length,disputeAmt:out.filter(o=>o.status==="Disputed").reduce((s,o)=>s+Math.abs(o.amt-o.undis),0),inflow,outflow}}
+function optimise(r){const need=r.out.filter(o=>o.dir==="Counterparty calls us").map(o=>({n:o.n,amt:-o.amt,el:o.el}));const inv=INV.map(i=>({k:i[0],n:i[1],h:i[2],bps:i[3],left:i[4]}));const alloc=[];let cost=0,base=0;
+  need.sort((a,b)=>b.amt-a.amt).forEach(nd=>{let rem=nd.amt;base+=nd.amt*45/1e4;const opts=inv.filter(i=>nd.el.includes(i.k)).sort((a,b)=>a.bps/(1-a.h/100)-b.bps/(1-b.h/100));
+    opts.forEach(i=>{if(rem<=0||i.left<=0)return;const mvNeed=rem/(1-i.h/100);const use=Math.min(mvNeed,i.left);i.left-=use;const val=use*(1-i.h/100);rem-=val;cost+=use*i.bps/1e4;alloc.push({to:nd.n,a:i.n,mv:use,val,h:i.h,bps:i.bps})})});
+  return {alloc,cost,base}}
+ENG.col=()=>colRun(COLDEF);
+MODS.col=function(box){const st=Object.assign({},COLDEF);
+  box.innerHTML=`<div class="mh"><div><h3>Collateral and margin</h3><p>The morning exposure run for eight counterparties under their credit support annexes: threshold, minimum transfer amount and rounding decide every call. Shock the market and the calls, disputes and collateral flows update.</p></div><span class="mhr"><span class="lab">Synthetic portfolio</span><a class="dl xl" href="Collateral_Margin_Call_Tracker.xlsx" download data-file="xl_col"><svg><use href="#i-dl"/></svg>Excel model <small>XLSX</small></a></span></div>
+  <div class="kpis" id="cK"></div><div class="mg"><div class="panel" id="cIn"><p class="pt">Overnight market moves</p><p class="ps">Applied to each counterparty's sensitivities</p></div>
+  <div><div class="panel"><p class="pt">Margin calls</p><p class="ps">Positive exposure: the counterparty owes us. Deliveries round up, returns round down. Disputes transfer the undisputed amount while portfolios are reconciled</p><div class="tw"><table class="t" id="cT"></table></div></div>
+  <div class="g2"><div class="panel"><p class="pt">Collateral we post: cheapest to deliver</p><p class="ps">Allocates eligible collateral by haircut-adjusted opportunity cost</p><div class="tw"><table class="t" id="cO"></table></div><p class="nt" id="cOn"></p></div><div class="panel"><p class="pt">Exposure against collateral held</p><svg class="chart" id="cC" viewBox="0 0 380 240"></svg><div class="lg"><span><i style="background:var(--navy)"></i>Exposure</span><span><i style="background:var(--gold)"></i>Collateral balance</span></div></div></div></div></div>`;
+  sliders($("#cIn"),[["r","Rates, bp",-30,30,1,v=>(v>0?"+":"")+v+" bp"],["f","USD versus basket, %",-5,5,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["q","Equities, %",-10,10,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["c","Commodities, %",-15,15,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["tol","Dispute tolerance, % of exposure",1,15,1,v=>v+"%"]],st,draw);
+  function draw(){const r=colRun(st),o=optimise(r);
+    kpis($("#cK"),[["Calls today",String(r.calls),"of 8 counterparties"],["Collateral due in",usd(r.inflow),"calls and recalls"],["Collateral due out",usd(r.outflow),"returns and their calls",r.outflow>r.inflow?"d":""],["Disputes",String(r.disputes),r.disputes?usd(r.disputeAmt)+" in dispute":"none",r.disputes?"d":"g"],["Optimisation saving",usd(o.base-o.cost),"a year vs posting cash","g"]]);
+    $("#cT").innerHTML=`<thead><tr><th>Counterparty</th><th>Product</th><th>Exposure</th><th>Threshold</th><th>Balance</th><th>Call</th><th>Status</th></tr></thead><tbody>`+r.out.map(c=>`<tr><td><b>${c.n}</b><small class="sub">${c.t}</small></td><td>${c.p}</td><td>${usd(c.E,1)}</td><td>${usd(c.thr,0)}</td><td>${usd(c.b,1)}</td><td>${c.amt?`<b>${usd(Math.abs(c.amt),1)}</b><small class="sub">${c.dir}</small>`:"–"}</td><td>${tag(c.status,c.cls)}${c.status==="Disputed"?`<small class="sub">pay ${usd(Math.abs(c.undis),1)} undisputed</small>`:""}</td></tr>`).join("")+`</tbody>`;
+    $("#cO").innerHTML=o.alloc.length?`<thead><tr><th>To</th><th>Asset</th><th>Market value</th><th>Haircut</th><th>Collateral value</th><th>Cost</th></tr></thead><tbody>`+o.alloc.map(a=>`<tr><td>${a.to}</td><td>${a.a}</td><td>${usd(a.mv,2)}</td><td>${a.h}%</td><td>${usd(a.val,2)}</td><td>${a.bps} bp</td></tr>`).join("")+`</tbody>`:`<tbody><tr><td>No counterparty is calling us today.</td></tr></tbody>`;
+    $("#cOn").textContent=o.alloc.length?`Annual carry cost ${usd(o.cost)} against ${usd(o.base)} if everything were posted in cash. Eligibility follows each counterparty's CSA: the corporate accepts cash only.`:"";
+    const s=$("#cC");s.innerHTML="";const W=380,H=240,L=112,R=10,T=6;const mx=Math.max(...r.out.map(c=>Math.max(Math.abs(c.E),Math.abs(c.b))))*1.1;const x0=L+(W-L-R)/2,sc=v=>v/mx*(W-L-R)/2;const rh=(H-T-6)/r.out.length;
+    el("line",{x1:x0,x2:x0,y1:T,y2:H-6,stroke:"var(--line2)"},s);
+    r.out.forEach((c,i)=>{const y=T+i*rh;tx(s,L-6,y+rh/2+4,c.n.split(" ")[0],{"text-anchor":"end",fill:"var(--ink)","font-size":"11"});
+      el("rect",{x:Math.min(x0,x0+sc(c.E)),y:y+3,width:Math.abs(sc(c.E)),height:rh/2-3,fill:"var(--navy)",rx:2},s);el("rect",{x:Math.min(x0,x0+sc(c.b)),y:y+rh/2,width:Math.abs(sc(c.b)),height:rh/2-3,fill:"var(--gold)",rx:2},s)})}
+  draw()};
+
+/* ===== 2. P&L explain ===== */
+const DESKS=[{k:"Rates",pv01:-95e3,theta:40e3,newT:120e3,fees:15e3,u:12e3},{k:"FX",fxd:180e3,theta:-10e3,newT:60e3,fees:0,u:-4e3},{k:"Equity derivatives",dlt:250e3,gam:40e3,veg:75e3,theta:-55e3,newT:35e3,fees:0,u:9e3},{k:"Commodities",cd:-140e3,theta:0,newT:20e3,fees:0,u:-6e3}];
+const PNLDEF={bp:-6,fx:.4,eq:-1.2,vol:1.5,cm:2.1,err:0,thr:50};
+function pnlRun(st){return DESKS.map(d=>{const c=[];
+  if(d.k==="Rates")c.push(["Rates move on PV01",d.pv01*st.bp]);
+  if(d.k==="FX")c.push(["FX delta",d.fxd*st.fx]);
+  if(d.k==="Equity derivatives"){c.push(["Delta",d.dlt*st.eq]);c.push(["Gamma",.5*d.gam*st.eq*st.eq]);c.push(["Vega",d.veg*st.vol])}
+  if(d.k==="Commodities")c.push(["Commodity delta",d.cd*st.cm]);
+  c.push(["Carry and time decay",d.theta]);c.push(["New trades",d.newT]);if(d.fees)c.push(["Fees",d.fees]);
+  const ex=c.reduce((s,x)=>s+x[1],0);const un=d.u+(d.k==="Equity derivatives"&&st.err?410e3:0);const act=ex+un;const lim=Math.max(st.thr*1e3,.1*Math.abs(act));
+  return {k:d.k,c,ex,un,act,flag:Math.abs(un)>lim,lim}})}
+ENG.pnl=()=>{const r=pnlRun(PNLDEF);const act=r.reduce((s,d)=>s+d.act,0),ex=r.reduce((s,d)=>s+d.ex,0);return {r,act,ex,pct:ex/act*100}};
+const lc=s=>/^[A-Z]{2}/.test(s)?s:s[0].toLowerCase()+s.slice(1);
+function commentary(d){const top=d.c.slice().sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]));const lead=top[0];
+  let s=`${d.k} ${d.act>=0?"made":"lost"} ${usd(Math.abs(d.act))}, driven mainly by ${lc(lead[0])} (${lead[1]>=0?"+":"−"}${usd(Math.abs(lead[1]))})`;
+  if(top[1]&&Math.abs(top[1][1])>20e3)s+=` and ${lc(top[1][0])} (${top[1][1]>=0?"+":"−"}${usd(Math.abs(top[1][1]))})`;
+  s+=`. Unexplained ${usd(d.un)}${d.flag?`, above the ${usd(d.lim)} tolerance: investigate bookings, market data and trade amendments before sign-off.`:", within tolerance."}`;return s}
+MODS.pnl=function(box){const st=Object.assign({},PNLDEF);
+  box.innerHTML=`<div class="mh"><div><h3>Daily P&amp;L explain</h3><p>Risk-based attribution for four trading desks: yesterday's sensitivities multiplied by today's market moves, plus carry and new trades, against the actual P&amp;L. What is left unexplained is where the questions start.</p></div><span class="mhr"><span class="lab">Synthetic desks</span><a class="dl xl" href="PnL_Attribution_Model.xlsx" download data-file="xl_pnl"><svg><use href="#i-dl"/></svg>Excel model <small>XLSX</small></a></span></div>
+  <div class="kpis" id="pK"></div><div class="mg"><div class="panel" id="pIn"><p class="pt">Today's market moves</p><p class="ps">Close to close</p><label class="chk"><input type="checkbox" id="pErr">Simulate a booking error on equities</label></div>
+  <div><div class="panel"><p class="pt">Explained against actual, by desk</p><svg class="chart" id="pC" viewBox="0 0 720 230"></svg><div class="lg"><span><i style="background:var(--navy)"></i>Explained</span><span><i style="background:var(--gold)"></i>Actual</span><span><i style="background:var(--red)"></i>Unexplained above tolerance</span></div></div>
+  <div class="panel"><p class="pt">Attribution</p><div class="tw"><table class="t" id="pT"></table></div></div>
+  <div class="panel"><p class="pt">Commentary for the front office</p><p class="ps">Drafted from the attribution, the way an MIS remarks engine writes</p><div class="memo" id="pM"></div></div></div></div>`;
+  sliders($("#pIn"),[["bp","Rates, bp",-25,25,1,v=>(v>0?"+":"")+v+" bp"],["fx","USD, %",-3,3,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["eq","Equities, %",-6,6,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["vol","Implied volatility, pts",-5,5,.1,v=>(v>0?"+":"")+grp(v,1)],["cm","Commodities, %",-8,8,.1,v=>(v>0?"+":"")+grp(v,1)+"%"],["thr","Unexplained tolerance, $k",10,200,5,v=>"$"+v+"k"]],st,draw);
+  $("#pErr").addEventListener("change",e=>{st.err=e.target.checked?1:0;draw()});
+  function draw(){const r=pnlRun(st),act=r.reduce((s,d)=>s+d.act,0),ex=r.reduce((s,d)=>s+d.ex,0),fl=r.filter(d=>d.flag).length;
+    kpis($("#pK"),[["Actual P&L, all desks",usd(act),"clean P&L",act>=0?"u":"d"],["Risk-explained",usd(ex),"sensitivities × moves"],["Explained share",grp(ex/act*100,1)+"%","of actual"],["Desks to investigate",String(fl),fl?"unexplained above tolerance":"all within tolerance",fl?"d":"g"]]);
+    const s=$("#pC");s.innerHTML="";const W=720,H=230,L=56,R=8,T=12,B=H-26;const vals=r.flatMap(d=>[d.ex,d.act]);const lo=Math.min(0,...vals)*1.2,hi=Math.max(0,...vals)*1.2;const y=axisY(s,lo,hi,L,R,T,B,W,v=>usd(v,1));const gw=(W-L-R)/r.length;
+    r.forEach((d,i)=>{const x=L+i*gw+gw*.2,bw=gw*.28;[[d.ex,"var(--navy)"],[d.act,d.flag?"var(--red)":"var(--gold)"]].forEach(([v,c],j)=>el("rect",{x:x+j*(bw+4),y:y(Math.max(0,v)),width:bw,height:Math.abs(y(v)-y(0)),rx:2,fill:c},s));tx(s,L+i*gw+gw/2,H-6,d.k,{"text-anchor":"middle",fill:"var(--ink)"})});
+    $("#pT").innerHTML=`<thead><tr><th>Desk</th><th>Component</th><th>P&amp;L</th></tr></thead><tbody>`+r.map(d=>d.c.map((c,j)=>`<tr><td>${j?"":`<b>${d.k}</b>`}</td><td>${c[0]}</td><td class="${c[1]<0?"neg":""}">${usd(c[1])}</td></tr>`).join("")+`<tr class="sub2"><td></td><td>Explained</td><td>${usd(d.ex)}</td></tr><tr class="sub2"><td></td><td>Unexplained</td><td>${d.flag?tag(usd(d.un),"d"):usd(d.un)}</td></tr><tr class="tot"><td></td><td>Actual</td><td>${usd(d.act)}</td></tr>`).join("")+`</tbody>`;
+    $("#pM").innerHTML=r.map(d=>`<p class="${d.flag?"warn":""}">${commentary(d)}</p>`).join("")}
+  draw()};
+
+/* ===== 3. Structured trade review ===== */
+const TRADES=[
+ {id:"SN-2041",p:"Barrier reverse convertible",u:"Equity index",n:5e6,ccy:"USD",f:[["Notional","5,000,000","5,000,000"],["Coupon","8.00% p.a.","8.00% p.a."],["Strike","100%","100%"],["Barrier (daily close)","60%","65%"],["Maturity","1 year","1 year"]],mc:1},
+ {id:"IRS-7730",p:"Interest rate swap, pay fixed",u:"USD SOFR",n:50e6,ccy:"USD",f:[["Notional","50,000,000","50,000,000"],["Fixed rate","4.10%","4.01%"],["Tenor","5 years","5 years"],["Float leg","SOFR compounded","SOFR compounded"]],irs:{d:.0009,ann:4.45}},
+ {id:"FXF-1182",p:"FX forward, sell EUR",u:"EUR/USD",n:20e6,ccy:"USD",f:[["Notional","EUR 20,000,000","EUR 20,000,000"],["Forward rate","1.0850","1.0580"],["Value date","3 months","3 months"]],fx:{d:.027}},
+ {id:"AC-3309",p:"Autocallable note",u:"Equity basket",n:8e6,ccy:"USD",f:[["Notional","8,000,000","8,000,000"],["Autocall trigger","100%, quarterly","not captured"],["Model","Monte Carlo script","Vanilla option"]],approx:1},
+ {id:"CS-5521",p:"Commodity swap and hedge",u:"Brent crude",n:10e6,ccy:"USD",f:[["Client notional","100,000 bbl","100,000 bbl"],["Hedge booked","100,000 bbl","120,000 bbl"],["Fixed price","$78.40","$78.40"]],over:1},
+ {id:"IRS-7741",p:"Interest rate swap, receive fixed",u:"USD SOFR",n:25e6,ccy:"USD",f:[["Notional","25,000,000","25,000,000"],["Fixed rate","3.95%","3.95%"],["Tenor","3 years","3 years"]]}];
+const STRDEF={vol:25,r:4,paths:6000};
+function diPut(barrier,vol,r,paths,seed){const R=mulberry32(seed||42),steps=252,dt=1/steps,sq=Math.sqrt(dt),drift=(r/100-.5*(vol/100)**2)*dt;let sum=0;const sample=[];
+  for(let p=0;p<paths;p++){let s=1,hit=false;const keep=p<14;const path=keep?[1]:null;for(let k=0;k<steps;k++){s*=Math.exp(drift+vol/100*sq*gauss(R));if(s<=barrier)hit=true;if(keep&&k%6===5)path.push(s)}if(keep)sample.push(path);if(hit&&s<1)sum+=1-s}
+  return {v:sum/paths*Math.exp(-r/100),sample}}
+function strRun(st,amended){return TRADES.map(t=>{const brk=t.f.filter(f=>f[1]!==f[2]);let mtm=0,type="Matched";
+  if(t.mc&&brk.length){const a=diPut(.60,st.vol,st.r,st.paths,7).v,b=diPut(.65,st.vol,st.r,st.paths,7).v;mtm=(b-a)*t.n;type="Mis-booking"}
+  if(t.irs&&brk.length){mtm=t.n*t.irs.d*t.irs.ann;type="Mis-booking"}
+  if(t.fx&&brk.length){mtm=t.n*t.fx.d;type="Mis-booking"}
+  if(t.approx)type="Approximate booking";if(t.over)type="Over-hedge";
+  const done=amended[t.id];return {t,brk,mtm,type,done}})}
+ENG.str=()=>{const r=strRun(STRDEF,{});return {brk:r.filter(x=>x.type!=="Matched").length,mtm:r.reduce((s,x)=>s+Math.abs(x.mtm),0)}};
+MODS.str=function(box){const st=Object.assign({},STRDEF);const amended={};
+  box.innerHTML=`<div class="mh"><div><h3>Structured trade review</h3><p>Bookings reconciled field by field against the term sheet and confirmation. Mis-bookings are priced for their mark-to-market impact; approximate bookings and over-hedges are flagged for reporting.</p></div><span class="lab">Synthetic trades</span></div>
+  <div class="kpis" id="sK"></div><div class="panel"><p class="pt">Review queue</p><div class="tw"><table class="t" id="sT"></table></div></div>
+  <div class="g2"><div class="panel"><p class="pt">Why the barrier matters: SN-2041 priced by Monte Carlo</p><p class="ps">Sample index paths over one year; a close below the barrier knocks in the investor's put. The dashed lines are the term-sheet (60%) and booked (65%) barriers</p><svg class="chart" id="sC" viewBox="0 0 380 240"></svg></div>
+  <div class="panel" id="sIn"><p class="pt">Pricing inputs</p><p class="ps">Geometric Brownian motion, daily closes, risk-neutral drift</p><div id="sMC" class="mcbox"></div></div></div>`;
+  sliders($("#sIn"),[["vol","Volatility",10,50,1,v=>v+"%"],["r","Interest rate",0,8,.25,v=>grp(v,2)+"%"],["paths","Simulated paths",2000,20000,1000,v=>grp(v)]],st,draw);
+  box.addEventListener("click",e=>{const b=e.target.closest("[data-am]");if(!b)return;amended[b.dataset.am]=1;toast(b.dataset.am+" amended; impact reported");draw()});
+  function draw(){const r=strRun(st,amended),open=r.filter(x=>x.type!=="Matched"&&!x.done),tot=r.filter(x=>x.type==="Mis-booking").reduce((s,x)=>s+Math.abs(x.mtm),0);
+    kpis($("#sK"),[["Trades reviewed",String(r.length)],["Breaks open",String(open.length),open.length?"awaiting amendment":"all closed",open.length?"d":"g"],["MTM impact of mis-bookings",usd(tot),"reported on amendment","d"],["Approximate bookings",String(r.filter(x=>x.type==="Approximate booking").length),"model does not capture payoff"],["Over-hedges",String(r.filter(x=>x.type==="Over-hedge").length),"conservative booking reported"]]);
+    $("#sT").innerHTML=`<thead><tr><th>Trade</th><th>Product</th><th>Field</th><th>Term sheet</th><th>Booked</th><th>Finding</th><th>MTM impact</th><th></th></tr></thead><tbody>`+r.map(x=>{const f=x.brk[0]||x.t.f[0];return `<tr><td><b>${x.t.id}</b></td><td>${x.t.p}<small class="sub">${x.t.u}</small></td><td>${x.brk.length?x.brk.map(b=>b[0]).join(", "):"All fields"}</td><td>${x.brk.length?x.brk.map(b=>b[1]).join(", "):"—"}</td><td>${x.brk.length?x.brk.map(b=>`<b class="red">${b[2]}</b>`).join(", "):"—"}</td><td>${x.done?tag("Amended","g"):x.type==="Matched"?tag("Matched","g"):tag(x.type,x.type==="Mis-booking"?"d":"a")}</td><td>${x.mtm?usd(x.mtm):"—"}</td><td>${x.type!=="Matched"&&!x.done?`<button class="mini" data-am="${x.t.id}">Amend</button>`:""}</td></tr>`}).join("")+`</tbody>`;
+    const a=diPut(.60,st.vol,st.r,st.paths,7),b=diPut(.65,st.vol,st.r,st.paths,7);
+    $("#sMC").innerHTML=`<table class="t"><tbody><tr><td>Knock-in put, barrier 60%</td><td>${grp(a.v*100,3)}% of notional</td></tr><tr><td>Knock-in put, barrier 65%</td><td>${grp(b.v*100,3)}% of notional</td></tr><tr class="tot"><td>Value difference on $5m</td><td>${usd((b.v-a.v)*5e6)}</td></tr></tbody></table><p class="nt">A higher barrier makes the knock-in more likely, so the mis-booked trade overstates the value of the put the bank holds. Amending it moves P&amp;L by this amount.</p>`;
+    const s=$("#sC");s.innerHTML="";const W=380,H=240,L=36,R=8,T=8,B=H-20;const all=a.sample.flat();const y=axisY(s,Math.min(.5,...all)*.95,Math.max(...all)*1.03,L,R,T,B,W,v=>grp(v*100,0)+"%");const n=a.sample[0].length;const x=i=>L+i/(n-1)*(W-L-R);
+    a.sample.forEach((p,i)=>{const hit=p.some(v=>v<=.6);el("polyline",{points:p.map((v,k)=>x(k).toFixed(1)+","+y(v).toFixed(1)).join(" "),fill:"none",stroke:hit?"var(--red)":"var(--navy)","stroke-width":1.1,opacity:.7},s)});
+    [[.6,"var(--red)","Term sheet 60%",12],[.65,"var(--gold)","Booked 65%",-4]].forEach(([v,c,l,o])=>{el("line",{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:c,"stroke-dasharray":"5 4","stroke-width":1.4},s);tx(s,L+6,y(v)+o,l,{fill:c,"font-weight":"700"})})}
+  draw()};
+
+/* ===== 4. Settlements (EMEA) ===== */
+const BROKERS=["Brightwater Securities","Castellan Brokers","Norhaven Capital Markets","Rivington Securities","Ashcombe Markets"];
+const CSDS=["Euroclear Bank","Clearstream Banking","CREST","Euroclear France"];
+const ITYPES=[["Liquid shares",1.0],["Illiquid shares",.5],["Government bonds",.1],["Other bonds",.2]];
+function setBook(){const R=mulberry32(2027);const out=[];for(let i=0;i<20;i++){const it=ITYPES[Math.floor(R()*4)];const ccy=R()<.35?"GBP":"EUR";const val=Math.round((.4+R()*9.6)*1e6/1e4)*1e4;
+  const r=R();const match=r<.7?"Matched":r<.85?"Unmatched":"Alleged";const reason=match==="Unmatched"?(R()<.6?"SSI mismatch":"Quantity differs"):match==="Alleged"?"Our instruction missing":"";const sr=R();const suff=sr<.82?"OK":sr<.93?"Short securities":"Short cash";
+  out.push({id:"STL-"+(4100+i),side:R()<.5?"Receive":"Deliver",it:it[0],rate:it[1],ccy,val,csd:CSDS[Math.floor(R()*4)],cp:BROKERS[Math.floor(R()*5)],dvp:R()<.88?"DVP":"FOP",match,reason,suff,age:0,pen:0,state:"Pending"})}return out}
+ENG.set=()=>{const b=setBook();return {unm:b.filter(x=>x.match!=="Matched").length,risk:b.filter(x=>x.match!=="Matched"||x.suff!=="OK").length}};
+MODS.set=function(box){let book=setBook(),day=0,t1=false;const log=[];
+  box.innerHTML=`<div class="mh"><div><h3>Securities settlements, EMEA</h3><p>Twenty equity and bond trades due today across Euroclear, Clearstream and CREST. Pre-match instructions, fix sufficiency, then run the settlement cycle: failed trades age and accrue cash penalties under CSDR by instrument type.</p></div><span class="lab">Synthetic trades</span></div>
+  <div class="kpis" id="tK"></div><div class="actions"><button class="btn sm" id="tPre">Run pre-matching</button><button class="btn sm ghost" id="tSuf">Resolve sufficiency</button><button class="btn sm ghost" id="tRun">Run settlement cycle</button><button class="btn sm ghost" id="tRes">Reset</button><label class="chk"><input type="checkbox" id="tT1">Compress to T+1 (no same-day matching)</label></div>
+  <div class="mg2"><div class="panel"><p class="pt">Settlement queue</p><p class="ps">Sorted by penalty exposure: value × daily rate</p><div class="tw" style="max-height:430px;overflow:auto"><table class="t" id="tT"></table></div></div><div class="panel"><p class="pt">Operations log</p><div class="log" id="tL">Start with pre-matching.</div><p class="nt">Daily cash penalty rates used: liquid shares 1.0 bp, illiquid shares 0.5 bp, government bonds 0.1 bp, other bonds 0.2 bp, applied to the value of the failing instruction.</p></div></div>`;
+  function L(m,c){log.push(`<span class="${c||""}">${m}</span>`);$("#tL").innerHTML=log.slice(-40).join("<br>");$("#tL").scrollTop=1e6}
+  function draw(){const pend=book.filter(x=>x.state!=="Settled"),set=book.filter(x=>x.state==="Settled"),fail=book.filter(x=>x.state==="Failed"),pen=book.reduce((s,x)=>s+x.pen,0);
+    kpis($("#tK"),[["Settled",set.length+" of "+book.length,pc(set.length/book.length*100,0)+" settlement rate",set.length===book.length?"g":""],["Unmatched or alleged",String(book.filter(x=>x.state!=="Settled"&&x.match!=="Matched").length),"need instructions fixed"],["Sufficiency gaps",String(book.filter(x=>x.state!=="Settled"&&x.suff!=="OK").length),"securities or cash short"],["Failing",String(fail.length),fail.length?"ageing "+Math.max(...fail.map(f=>f.age))+" days":"none",fail.length?"d":"g"],["Penalties accrued",usd(pen,1),"CSDR cash penalties",pen?"d":""]]);
+    const rows=book.slice().sort((a,b)=>(b.state!=="Settled")-(a.state!=="Settled")||b.val*b.rate-a.val*a.rate);
+    $("#tT").innerHTML=`<thead><tr><th>Trade</th><th>Side</th><th>Instrument</th><th>Value</th><th>CSD</th><th>Matching</th><th>Sufficiency</th><th>Status</th></tr></thead><tbody>`+rows.map(x=>`<tr><td><b>${x.id}</b><small class="sub">${x.cp}</small></td><td>${x.side} ${x.dvp}</td><td>${x.it}</td><td>${ccy(x.val,x.ccy)}</td><td>${x.csd}</td><td>${x.match==="Matched"?tag("Matched","g"):tag(x.match+(x.reason?": "+x.reason:""),"a")}</td><td>${x.suff==="OK"?tag("OK","g"):tag(x.suff,"d")}</td><td>${x.state==="Settled"?tag("Settled","g"):x.state==="Failed"?tag("Failed, day "+x.age+", "+ccy(x.pen,x.ccy)+" penalty","d"):tag("Pending","n")}</td></tr>`).join("")+`</tbody>`}
+  $("#tPre").addEventListener("click",()=>{let k=0;book.forEach(x=>{if(x.state!=="Settled"&&x.match!=="Matched"){if(x.reason==="SSI mismatch"){x.match="Matched";x.reason="";k++;L(`✓ ${x.id}: SSIs aligned with ${x.cp}; instruction matched at ${x.csd}.`,"ok")}else if(x.reason==="Our instruction missing"){x.match="Matched";x.reason="";k++;L(`✓ ${x.id}: counterparty alleged; our instruction created and matched.`,"ok")}else L(`⚑ ${x.id}: quantity differs; confirmation sent to ${x.cp} for affirmation.`,"w")}});if(!k)L("No further instructions can be matched automatically.","w");draw()});
+  $("#tSuf").addEventListener("click",()=>{let k=0;book.forEach(x=>{if(x.state!=="Settled"&&x.suff!=="OK"){if(x.suff==="Short securities"){L(`✓ ${x.id}: ${x.it.toLowerCase()} borrowed from the lending desk to cover delivery.`,"ok")}else{L(`✓ ${x.id}: ${x.ccy} funding moved into the ${x.csd} cash account.`,"ok")}x.suff="OK";k++}});if(!k)L("No sufficiency gaps left.","w");draw()});
+  $("#tRun").addEventListener("click",()=>{day++;let s=0,f=0;book.forEach(x=>{if(x.state==="Settled")return;const qdiff=x.reason==="Quantity differs";if(qdiff&&day>=2&&!t1){x.match="Matched";x.reason=""}
+      const ok=x.match==="Matched"&&x.suff==="OK";if(ok){x.state="Settled";s++}else{x.state="Failed";x.age++;x.pen+=x.val*x.rate/1e4;f++}});
+    L(`■ Cycle ${day}: ${s} settled, ${f} failed.${f?" Penalties accrue daily on failing instructions.":""}`,f?"x":"ok");draw()});
+  $("#tRes").addEventListener("click",()=>{book=setBook();day=0;log.length=0;$("#tL").textContent="Book reset. Start with pre-matching.";draw()});
+  $("#tT1").addEventListener("change",e=>{t1=e.target.checked;L(t1?"T+1 mode: anything not matched by the end of trade date fails; there is no second day to fix it.":"Back to T+2.","w")});
+  draw()};
+
+/* ===== 5. Asset servicing ===== */
+const ASTDEF={dps:.42,std:25,treaty:15,lend:1,late:1};const E=(x,d)=>ccy(x,"EUR",d);
+function astRun(st){const acc=[["House account","long",1200000,"std"],["Prime client: US pension plan","long",450000,"exempt"],["Prime client: Cayman fund","long",600000,"std"],["Prime client: EU fund","long",350000,"treaty"],["Prime client: short seller","short",-300000,"na"]];
+  if(st.lend)acc.push(["Stock lent to borrower","lent",-200000,"na"]);
+  const rows=acc.map(a=>{const rate=a[3]==="std"?st.std:a[3]==="treaty"?st.treaty:0;const gross=Math.abs(a[2])*st.dps;let tax=0,net,flow,note;
+    if(a[1]==="long"){tax=gross*rate/100;net=gross-tax;flow="Receive";note=a[3]==="exempt"?"Tax-exempt status on file":a[3]==="treaty"?"Treaty rate applied":"Standard withholding"}
+    else if(a[1]==="short"){net=-gross;flow="Pay manufactured";note="Short on record date: pays the gross dividend"}
+    else{net=gross;flow="Claim manufactured";note="Borrower pays us the manufactured dividend"}
+    return {n:a[0],pos:a[2],gross,rate,tax,net,flow,note}});
+  const claim=st.late?{n:"Market claim: purchase settling after record date",qty:150000,amt:150000*st.dps}:null;
+  const expectedCust=rows.filter(r=>r.flow==="Receive").reduce((s,r)=>s+r.net,0);const receivedCust=expectedCust-350000*st.dps*Math.max(0,st.std-st.treaty)/100;const brk=expectedCust-receivedCust;
+  return {rows,claim,expectedCust,receivedCust,brk}}
+ENG.ast=()=>{const r=astRun(ASTDEF);return {claims:(r.claim?1:0)+(ASTDEF.lend?1:0),brk:r.brk}};
+MODS.ast=function(box){const st=Object.assign({},ASTDEF);
+  box.innerHTML=`<div class="mh"><div><h3>Asset servicing: a dividend event</h3><p>A cash dividend on a European-listed stock held across the house and prime brokerage accounts. Entitlements are set on record date; tax depends on each client's status; shorts, loans and late settlements create manufactured payments and claims; the custodian's cash is reconciled.</p></div><span class="lab">Synthetic event</span></div>
+  <div class="kpis" id="aK"></div><div class="mg"><div class="panel" id="aIn"><p class="pt">Event terms</p><p class="ps">Ex-date, then record date one business day later, payment in three weeks</p><label class="chk"><input type="checkbox" id="aL" checked>Include stock on loan</label><label class="chk"><input type="checkbox" id="aT" checked>A client purchase settles after record date</label></div>
+  <div><div class="panel"><p class="pt">Entitlements on record date</p><div class="tw"><table class="t" id="aTb"></table></div></div><div class="g2"><div class="panel"><p class="pt">Cash reconciliation with the custodian</p><div id="aR"></div></div><div class="panel"><p class="pt">Client query log</p><div class="log" id="aQ"></div></div></div></div></div>`;
+  sliders($("#aIn"),[["dps","Dividend per share, €",.05,2,.01,v=>"€"+grp(v,2)],["std","Standard withholding",0,35,1,v=>v+"%"],["treaty","Treaty rate",0,25,1,v=>v+"%"]],st,draw);
+  $("#aL").addEventListener("change",e=>{st.lend=e.target.checked?1:0;draw()});$("#aT").addEventListener("change",e=>{st.late=e.target.checked?1:0;draw()});
+  function draw(){const r=astRun(st);const gross=r.rows.filter(x=>x.flow==="Receive").reduce((s,x)=>s+x.gross,0);
+    kpis($("#aK"),[["Gross entitlement",E(gross),"long positions"],["Withholding tax",E(r.rows.reduce((s,x)=>s+x.tax,0)),"by client status"],["Claims raised",String((r.claim?1:0)+(st.lend?1:0)),"manufactured and market claims"],["Cash break",E(r.brk),r.brk>1?"tax applied at source too high":"none",r.brk>1?"d":"g"]]);
+    $("#aTb").innerHTML=`<thead><tr><th>Account</th><th>Position</th><th>Gross</th><th>Tax rate</th><th>Net</th><th>Flow</th></tr></thead><tbody>`+r.rows.map(x=>`<tr><td><b>${x.n}</b><small class="sub">${x.note}</small></td><td>${grp(x.pos)}</td><td>${E(x.gross,1)}</td><td>${x.flow==="Receive"?x.rate+"%":"–"}</td><td class="${x.net<0?"neg":""}">${E(x.net,1)}</td><td>${x.flow}</td></tr>`).join("")+(r.claim?`<tr><td><b>${r.claim.n}</b><small class="sub">Traded before ex-date, settles after record date: the seller received it</small></td><td>${grp(r.claim.qty)}</td><td>${E(r.claim.amt,1)}</td><td>–</td><td>${E(r.claim.amt,1)}</td><td>Market claim</td></tr>`:"")+`</tbody>`;
+    $("#aR").innerHTML=`<table class="t"><tbody><tr><td>Expected from custodian (long positions, net)</td><td>${E(r.expectedCust,1)}</td></tr><tr><td>Received</td><td>${E(r.receivedCust,1)}</td></tr><tr class="tot"><td>Break</td><td>${E(r.brk,1)}</td></tr></tbody></table><p class="nt">Root cause: the EU fund was taxed at the standard ${st.std}% at source instead of its ${st.treaty}% treaty rate because its tax documentation had not reached the custodian. Action: send the documents and file a reclaim; the client is credited at the treaty rate on pay date.</p>`;
+    $("#aQ").innerHTML=[`<span class="ok">✓ Pension plan asked why no tax was deducted: exempt status confirmed from documents on file.</span>`,`<span class="w">⚑ EU fund queried a short payment: tax reclaim of ${E(r.brk,1)} filed with the custodian.</span>`,r.claim?`<span class="ok">✓ Market claim of ${E(r.claim.amt,1)} raised against the selling broker.</span>`:"",st.lend?`<span class="ok">✓ Manufactured dividend of ${E(200000*st.dps,1)} claimed from the borrower.</span>`:""].filter(Boolean).join("<br>")}
+  draw()};
+
+/* ===== 6. Metric governance ===== */
+const METRICS=[["Margin calls issued before cut-off","%",[98.2,98.6,99.1,98.9,99.3,99.4],98,97,1,"Calls system report"],["Collateral disputes aged over 5 days","count",[2,3,2,4,5,6],3,5,0,"Dispute tracker"],["Days with unexplained P&L above tolerance","days",[1,0,2,1,1,3],1,2,0,"P&L sign-off log"],["Settlement fail rate","%",[1.2,1.4,1.1,1.6,1.9,2.2],1.5,2.0,0,"CSD reports"],["Breaks aged over 30 days","count",[0,1,0,0,1,1],0,1,0,"Reconciliation tool"],["Reconciliations completed within SLA","%",[100,100,99,100,98,100],100,98,1,"Recs dashboard"],["Corporate action claims aged over 60 days","count",[3,2,2,1,2,2],2,4,0,"Claims ledger"],["Manual adjustments to booked trades","count",[4,6,5,7,6,8],5,8,0,"Amendment log"],["Four-eyes checks evidenced","%",[100,100,100,99,100,100],100,99,1,"Control evidence"],["Static data changes without approval","count",[0,0,0,1,0,0],0,1,0,"Static data audit"]];
+const RCA={"Collateral disputes aged over 5 days":["Process","Disputes with two hedge fund counterparties are driven by different volatility marks on equity options; portfolio reconciliations run weekly, not daily.","Move to daily portfolio reconciliation for the two counterparties, escalate marks to the valuation team within 24 hours, and agree a dispute-resolution calendar. Expected green in two months."],
+ "Days with unexplained P&L above tolerance":["Data","Two of the three days traced to late market data for commodity curves; one to a mis-booked barrier on a structured note.","Add a market-data completeness check before the P&L run and a same-day booking review for structured trades. Expected green next month."],
+ "Settlement fail rate":["External and static data","Fails concentrated in three brokers with outdated settlement instructions (SSIs); rising volumes ahead of the move to T+1.","Refresh SSIs with the three brokers, pre-match on trade date, and track affirmation rates daily. Expected green in two months."],
+ "Manual adjustments to booked trades":["System","Manual adjustments rose with a booking template that lacks the autocall feature, forcing approximate bookings.","Raise a change request for the template, report approximate bookings weekly until fixed. Expected green in one quarter."],
+ "Breaks aged over 30 days":["Process","One cash break awaits a custodian tax reclaim.","Escalate the reclaim to the custodian relationship manager; close on receipt."]};
+function rag(m){const v=m[2][5],good=m[5]===1;if(good?v>=m[3]:v<=m[3])return "Green";if(good?v>=m[4]:v<=m[4])return "Amber";return "Red"}
+ENG.met=()=>{const r=METRICS.map(rag);return {red:r.filter(x=>x==="Red").length,amber:r.filter(x=>x==="Amber").length}};
+MODS.met=function(box){const val={};
+  box.innerHTML=`<div class="mh"><div><h3>Metric governance</h3><p>Ten operational risk metrics for a markets operations function: validate each value against its source, rate it against thresholds, and write the root cause and get-to-green plan for anything off track.</p></div><span class="lab">Synthetic metrics</span></div>
+  <div class="kpis" id="gK"></div><div class="panel"><p class="pt">Scorecard, last six months</p><div class="tw"><table class="t" id="gT"></table></div></div>
+  <div class="panel"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center"><div><p class="pt">Root cause and get-to-green commentary</p><p class="ps">Drafted for every amber and red metric; edit before submitting</p></div><button class="btn sm ghost" id="gCopy">Copy commentary pack</button></div><div id="gC"></div></div>`;
+  function spark(a){const W=90,H=24,mx=Math.max(...a),mn=Math.min(...a),r=mx-mn||1;return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline points="${a.map((v,i)=>(i*W/(a.length-1)).toFixed(1)+","+(H-2-(v-mn)/r*(H-4)).toFixed(1)).join(" ")}" fill="none" stroke="var(--navy)" stroke-width="1.6"/></svg>`}
+  function draw(){const st=METRICS.map(rag);const nv=Object.keys(val).length;
+    kpis($("#gK"),[["Green",String(st.filter(x=>x==="Green").length),"on track","g"],["Amber",String(st.filter(x=>x==="Amber").length),"watch","a"],["Red",String(st.filter(x=>x==="Red").length),"get-to-green plan needed","d"],["Values validated",nv+" of "+METRICS.length,nv===METRICS.length?"ready to publish":"tick each against its source",nv===METRICS.length?"g":""]]);
+    $("#gT").innerHTML=`<thead><tr><th>Metric</th><th>Trend</th><th>This month</th><th>Target</th><th>Status</th><th>Source</th><th>Validated</th></tr></thead><tbody>`+METRICS.map((m,i)=>`<tr><td><b>${m[0]}</b></td><td>${spark(m[2])}</td><td>${m[2][5]}${m[1]==="%"?"%":""}</td><td>${m[5]?"≥ ":"≤ "}${m[3]}${m[1]==="%"?"%":""}</td><td>${tag(st[i],st[i]==="Green"?"g":st[i]==="Amber"?"a":"d")}</td><td>${m[6]}</td><td><input type="checkbox" data-v="${i}" ${val[i]?"checked":""} aria-label="Validated"></td></tr>`).join("")+`</tbody>`;
+    $("#gC").innerHTML=METRICS.map((m,i)=>[m,st[i]]).filter(x=>x[1]!=="Green").map(([m,s])=>{const c=RCA[m[0]]||["Process","Root cause under review.","Plan to be agreed with the process owner."];return `<article class="g2g ${s==="Red"?"r":"a"}"><h4>${m[0]} ${tag(s,s==="Red"?"d":"a")}</h4><p><b>Root cause (${c[0]}):</b> ${c[1]}</p><p><b>Get to green:</b> ${c[2]}</p></article>`}).join("");
+    $$("#gT input[data-v]").forEach(c=>c.addEventListener("change",()=>{if(c.checked)val[c.dataset.v]=1;else delete val[c.dataset.v];draw()}))}
+  $("#gCopy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("#gC").innerText);toast("Commentary pack copied")}catch(e){toast("Select the text to copy")}});
+  draw()};
+
+/* ===== 7. Trade reconciliation (booking vs confirmations) ===== */
+const REC_TYPES=["Unconfirmed","Unbooked","Counterparty","Notional","Rate or price","Value date"];
+const REC_OWNER={"Unconfirmed":"Confirmations team: chase counterparty","Unbooked":"Front office: book or reject","Counterparty":"Static data: correct legal entity","Notional":"Middle office: amend booking","Rate or price":"Middle office: amend booking","Value date":"Middle office: amend booking"};
+function recData(){const R=mulberry32(99);const prods=["IRS","FX forward","FX swap","Equity option","Commodity swap","Repo","CDS"];const cps=["Aldridge Capital","Northbay Pension Fund","Kestrel Macro Fund","Harbour Insurance","Solent Asset Management","Meridian Bank","Tarn Energy Trading","Vale Corporate Treasury"];
+  const book=[],conf=[];for(let i=0;i<240;i++){const t={id:"TR-"+(50100+i),p:prods[Math.floor(R()*prods.length)],cp:cps[Math.floor(R()*cps.length)],n:Math.round((1+R()*49))*1e6,r:+(1+R()*6).toFixed(4),vd:"+"+(1+Math.floor(R()*3))+"d",age:Math.floor(R()*R()*10)};
+    const x=R();const c=Object.assign({},t);
+    if(x<.012){book.push(t);continue}
+    if(x<.02){conf.push(c);continue}
+    if(x<.028)c.cp=cps[(cps.indexOf(t.cp)+1)%cps.length];
+    else if(x<.045)c.n=t.n+ (R()<.5?1:-1)*Math.round(t.n*(.001+R()*.02));
+    else if(x<.055)c.r=+(t.r+(R()<.5?.01:-.01)).toFixed(4);
+    else if(x<.065)c.vd="+"+(parseInt(t.vd.slice(1))+1)+"d";
+    book.push(t);conf.push(c)}return {book,conf}}
+function recRun(tolBp){const {book,conf}=recData();const cm=new Map(conf.map(c=>[c.id,c])),bm=new Map(book.map(b=>[b.id,b]));const out=[];
+  book.forEach(b=>{const c=cm.get(b.id);let s="Matched";if(!c)s="Unconfirmed";else if(b.cp!==c.cp)s="Counterparty";else if(Math.abs(b.n-c.n)>b.n*tolBp/1e4)s="Notional";else if(b.r!==c.r)s="Rate or price";else if(b.vd!==c.vd)s="Value date";out.push({b,c,s,id:b.id,age:b.age,n:b.n,p:b.p,cp:b.cp})});
+  conf.forEach(c=>{if(!bm.has(c.id))out.push({b:null,c,s:"Unbooked",id:c.id,age:c.age,n:c.n,p:c.p,cp:c.cp})});
+  const br=out.filter(o=>o.s!=="Matched");return {out,br,matched:out.length-br.length,total:out.length}}
+ENG.rec=()=>{const r=recRun(1);return {br:r.br.length,aged:r.br.filter(x=>x.age>3).length,pct:r.matched/r.total*100}};
+MODS.rec=function(box){const st={tol:1};let filt="All";
+  box.innerHTML=`<div class="mh"><div><h3>Trade reconciliation</h3><p>240 OTC trades compared between the booking system and counterparty confirmations. Every difference is classified, aged and routed to an owner; the SQL shows the same logic a reconciliation tool runs.</p></div><span class="mhr"><span class="lab">Synthetic trades</span><a class="dl xl" href="Trade_Break_Reconciliation.xlsx" download data-file="xl_rec"><svg><use href="#i-dl"/></svg>Excel model <small>XLSX</small></a></span></div>
+  <div class="kpis" id="rcK"></div><div class="mg"><div><div class="panel" id="rcIn"><p class="pt">Matching rules</p><p class="ps">Notional tolerance in basis points of notional</p></div><div class="panel"><p class="pt">Filter breaks</p><div class="seg" id="rcF"></div></div><div class="panel"><p class="pt">Breaks by type</p><svg class="chart" id="rcC" viewBox="0 0 260 190"></svg></div></div>
+  <div><div class="panel"><p class="pt">Open breaks, oldest first</p><div class="tw" style="max-height:360px;overflow:auto"><table class="t" id="rcT"></table></div></div>
+  <div class="panel"><p class="pt">The same logic in SQL</p><pre class="sql" id="rcS"></pre></div></div></div>`;
+  sliders($("#rcIn"),[["tol","Notional tolerance",0,50,1,v=>v+" bp"]],st,draw);
+  $("#rcF").innerHTML=["All"].concat(REC_TYPES).map(t=>`<button data-f="${t}" aria-pressed="${t==="All"}">${t}</button>`).join("");
+  $$("#rcF button").forEach(b=>b.addEventListener("click",()=>{filt=b.dataset.f;$$("#rcF button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));draw()}));
+  function draw(){const r=recRun(st.tol),aged=r.br.filter(x=>x.age>3);const val=r.br.reduce((s,x)=>s+x.n,0);
+    kpis($("#rcK"),[["Trades compared",String(r.total)],["Matched",grp(r.matched/r.total*100,1)+"%",r.matched+" trades","g"],["Open breaks",String(r.br.length),"classified and routed",r.br.length?"d":"g"],["Aged over 3 days",String(aged.length),"escalate to owners",aged.length?"d":"g"],["Notional affected",usd(val,1),"across open breaks"]]);
+    const rows=r.br.filter(x=>filt==="All"||x.s===filt).sort((a,b)=>b.age-a.age);
+    $("#rcT").innerHTML=`<thead><tr><th>Trade</th><th>Product</th><th>Break</th><th>Booked</th><th>Confirmed</th><th>Age</th><th>Owner and action</th></tr></thead><tbody>`+rows.map(x=>{const f=x.s==="Notional"?[usd(x.b.n,2),usd(x.c.n,2)]:x.s==="Rate or price"?[x.b.r,x.c.r]:x.s==="Value date"?["T"+x.b.vd.replace("d",""),"T"+x.c.vd.replace("d","")]:x.s==="Counterparty"?[x.b.cp,x.c.cp]:x.s==="Unconfirmed"?[usd(x.n,1),"missing"]:["missing",usd(x.n,1)];
+      return `<tr><td><b>${x.id}</b><small class="sub">${x.cp}</small></td><td>${x.p}</td><td>${tag(x.s,x.s==="Unconfirmed"||x.s==="Unbooked"?"d":"a")}</td><td>${f[0]}</td><td>${f[1]}</td><td>${x.age>3?`<b class="red">${x.age}d</b>`:x.age+"d"}</td><td>${REC_OWNER[x.s]}</td></tr>`}).join("")+`</tbody>`;
+    const cnt=REC_TYPES.map(t=>r.br.filter(x=>x.s===t).length);const s=$("#rcC");s.innerHTML="";const mx=Math.max(1,...cnt);
+    REC_TYPES.forEach((t,i)=>{const y=6+i*30;tx(s,0,y+15,t,{fill:"var(--ink)","font-size":"11"});el("rect",{x:92,y:y+4,width:Math.max(2,cnt[i]/mx*140),height:16,rx:2,fill:i<2?"var(--red)":"var(--gold)"},s);tx(s,92+cnt[i]/mx*140+6,y+16,String(cnt[i]),{fill:"var(--ink)","font-weight":"700"})});
+    $("#rcS").textContent=`SELECT COALESCE(b.trade_id, c.trade_id) AS trade_id,
+       CASE
+         WHEN c.trade_id IS NULL THEN 'Unconfirmed'
+         WHEN b.trade_id IS NULL THEN 'Unbooked'
+         WHEN b.counterparty <> c.counterparty THEN 'Counterparty'
+         WHEN ABS(b.notional - c.notional) > b.notional * ${st.tol} / 10000
+              THEN 'Notional'
+         WHEN b.rate <> c.rate THEN 'Rate or price'
+         WHEN b.value_date <> c.value_date THEN 'Value date'
+         ELSE 'Matched'
+       END AS status,
+       DATEDIFF(day, b.trade_date, CURRENT_DATE) AS age_days
+FROM booking b
+FULL OUTER JOIN confirmations c ON b.trade_id = c.trade_id
+ORDER BY age_days DESC;`}
+  draw()};
+
+/* ===== The operating day (hero), computed from the workbench engines after first paint ===== */
+function buildDay(){const c=ENG.col(),p=ENG.pnl(),s=ENG.str(),t=ENG.set(),a=ENG.ast(),m=ENG.met(),r=ENG.rec();
+  const D=[["06:30","col","Collateral","Exposure run and margin calls",`${c.calls} calls, ${c.disputes} dispute`],
+   ["08:15","pnl","P&L","Daily P&L explained to the desks",`${grp(p.pct,1)}% explained`],
+   ["10:00","rec","Confirmations","Bookings reconciled to confirmations",`${r.br} breaks, ${r.aged} aged`],
+   ["11:30","str","Trade review","Structured bookings checked against term sheets",`${s.brk} findings, ${usd(s.mtm)} MTM`],
+   ["13:30","set","Settlements","London open: pre-matching and sufficiency",`${t.risk} at risk of failing`],
+   ["16:00","ast","Asset servicing","Dividend entitlements, claims, cash recs",`${a.claims} claims, 1 cash break`],
+   ["19:00","met","Governance","Metrics validated, get-to-green drafted",`${m.red} red, ${m.amber} amber`]];
+  $("#day").innerHTML=D.map(d=>`<button class="dr" data-go="${d[1]}"><span class="tm">${d[0]}</span><span class="ds"><b>${d[2]}</b>${d[3]}</span><span class="dv">${d[4]}</span></button>`).join("");
+  $$("#day .dr").forEach(b=>b.addEventListener("click",()=>{openMod(b.dataset.go);$("#workbench").scrollIntoView({behavior:RM?"auto":"smooth"})}));
+  return {c,p,s,t,a,m,r}}
+
+/* ===== projects ===== */
+const WORK=[
+ {k:"Controls and metrics",n:"Continuous Controls Monitoring",t:"Power BI",d:"Six exception tests (duplicates, threshold avoidance, Benford's Law, three-way match, SoD, after-hours postings) across 12,095 transactions, published as RAG-rated control metrics with root-cause and get-to-green commentary.",m:[["1,152","exceptions flagged"],["₹25.5 Cr","value flagged"],["6","RAG-rated metrics"]],go:"met",gl:"See metric governance live",dl:[["ccm_pdf","Project deck","PDF"]]},
+ {k:"Reconciliation",n:"Automated Cash Reconciliation",t:"Gen AI",d:"Reads inbound payment advices daily, matches each to the referenced receipt and updates the tracker without manual entry. Exception logic ages partial payments as open items until they are resolved.",m:[["Daily","unattended run"],["0","manual entries"],["Aged","open items"]],go:"ast",gl:"See a cash reconciliation live"},
+ {k:"Markets and P&L",n:"Portfolio Optimisation & P&L Attribution",t:"Excel",d:"5,000 simulated portfolios across a 14-asset universe, mapping the efficient frontier, with daily P&L attributed to asset-class moves and written up as driver commentary.",m:[["0.452 → 0.728","Sharpe ratio"],["5,000","portfolios"],["Daily","P&L explained"]],go:"pnl",gl:"See P&L explain live",dl:[["wm_model","Model","XLSX"],["wm_deck","Deck","PPTX"]]}];
+$("#work-grid").innerHTML=WORK.map(w=>`<article class="wk rv"><span class="k">${w.k}<em>${w.t}</em></span><h3>${w.n}</h3><p>${w.d}</p><div class="wm">${w.m.map(x=>`<div><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div><div class="wd">${(w.dl||[]).map(x=>`<a class="dl" href="${FILES[x[0]]}" download data-file="${x[0]}"><svg><use href="#i-dl"/></svg>${x[1]} <small>${x[2]}</small></a>`).join("")}</div></article>`).join("");
+$$("#work-grid .rv").forEach(x=>ro.observe(x));
+function buildOps(e){const OPS=[
+ ["col","Collateral","OTC Collateral & Margin Call Tracker","Excel, Python","Daily exposure run under each counterparty's CSA (threshold, MTA, rounding), dispute handling on the undisputed amount, and cheapest-to-deliver collateral after haircuts.",[[String(e.c.calls),"calls today"],[String(e.c.disputes),"dispute handled"],["~49%","carry cost saved"]]],
+ ["pnl","P&L","Desk P&L Attribution & Commentary","Excel, VBA","Rates, FX, equity and commodity desk P&L explained through PV01, delta, gamma, vega and theta, with unexplained P&L flagged and commentary drafted for the front office.",[["4","desks"],[grp(e.p.pct,1)+"%","explained"],["Auto","commentary"]]],
+ ["rec","Confirmations","Trade Break Reconciliation","SQL","Booking system against counterparty confirmations with a full outer join: breaks classified by type, aged and routed to the right owner.",[["240","trades"],[String(e.r.br),"breaks"],[String(e.r.aged),"aged over 3 days"]]],
+ ["str","Trade review","Structured Note Booking Review","Python","Term sheet against booking, field by field; a barrier mis-booking priced by Monte Carlo simulation, plus approximate bookings and over-hedges flagged.",[["6","trades"],[String(e.s.brk),"findings"],[usd(e.s.mtm),"MTM impact"]]],
+ ["set","Settlements","EMEA Settlement Fails & T+1 Study","SQL, Power BI","Pre-matching, sufficiency and CSDR penalty accrual across Euroclear, Clearstream and CREST, with a T+1 mode showing what the October 2027 switch does to fails.",[["20","trades"],[String(e.t.risk),"at risk of failing"],["T+1","scenario"]]],
+ ["ast","Asset servicing","Corporate Actions Entitlement & Claims","Excel","A dividend across house and prime brokerage accounts: record-date entitlements, withholding tax by client status, manufactured dividends, market claims and a cash-break root cause.",[["6","accounts"],[String(e.a.claims),"claims raised"],["1","cash break solved"]]],
+ ["met","Governance","Operational KRI Scorecard","Power BI","Ten markets operations risk metrics validated against source, rated red, amber or green, with root cause and get-to-green commentary.",[["10","KRIs"],[String(e.m.red),"red"],[String(e.m.amber),"amber"]]]];
+  $("#ops-grid").innerHTML=OPS.map(o=>`<div class="op"><div><b>${o[2]}</b><small>${o[1]}</small></div><span class="tl">${o[3]}</span><span class="fg">${o[5].map(x=>x[0]+" "+x[1]).slice(0,2).join(" · ")}</span><button class="dl live-go" data-go="${o[0]}">Open →</button></div>`).join("");
+  $$("#ops-grid .live-go").forEach(b=>b.addEventListener("click",()=>{openMod(b.dataset.go);$("#workbench").scrollIntoView({behavior:RM?"auto":"smooth"})}))}
+
+
+/* ===== credentials ===== */
+const CREDS=[
+ {g:"Certifications",n:"Lean Six Sigma Green Belt",by:"Coursera · 2026 · 26 weeks",p:"Process improvement, DMAIC, root cause analysis",s:"earned"},
+ {g:"Certifications",n:"Financial Markets",by:"Yale University, Coursera · 2026 · 3 weeks",p:"Markets, instruments, risk and institutions",s:"earned"},
+ {g:"Certifications",n:"Google Data Analytics Professional Certificate",by:"Google · 2026 · 26 weeks",p:"Data cleaning, analysis and visualisation",s:"earned"},
+ {g:"Certifications",n:"Power BI Data Analyst Professional Certificate",by:"Microsoft · 2026 · 20 weeks",p:"Data modelling, DAX and dashboards",s:"earned"},
+ {g:"Certifications",n:"SQL for Data Science",by:"University of California, Davis, Coursera · 2026",p:"Queries, joins, aggregation and subqueries",s:"earned"},
+ {g:"Certifications",n:"Python for Everybody",by:"University of Michigan, Coursera · 2026",p:"Python, data structures and data handling",s:"earned"},
+ {g:"Job simulations",n:"Markets Sales & Trading",by:"Citi, Forage · 2026",p:"Products, pricing and trade flow",s:"earned"},
+ {g:"Job simulations",n:"Quantitative Research",by:"J.P. Morgan, Forage · 2026",p:"Pricing and risk analysis",s:"earned"}];
+(function(){$("#ledger").innerHTML=CREDS.map(c=>`<div><span><b>${c.n}</b><small>${c.by}</small></span>${c.s==="earned"?tag("Completed","g"):tag("In progress","a")}</div>`).join("")})();
+
+/* ===== internship impact ===== */
+(function(){const D=[["MIS commentary",240,1,"4 hrs → under 1 min","−99.6%"],["Recovery notice",180,30,"3 hrs → 30 min","−83%"],["ETA data assembly",1800,5,"30 hrs a month → minutes","automated"]];
+  function draw(){$("#xpB").innerHTML=D.map(r=>`<div class="xb"><span class="lb">${r[0]}</span><div class="tr"><div class="br b0" data-w="${(r[1]/1800*100).toFixed(1)}"></div><div class="br b1" data-w="${Math.max(.8,r[2]/1800*100).toFixed(1)}"></div></div><span class="vv"><b>${r[4]}</b>${r[3]}</span></div>`).join("");
+    requestAnimationFrame(()=>requestAnimationFrame(()=>$$("#xpB .br").forEach(x=>x.style.width=x.dataset.w+"%")))}
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();draw()}},{threshold:.3});io.observe($("#xpB"))})();
+
+/* ===== skills with evidence ===== */
+const SK=[
+ ["Markets and products",[["OTC derivatives: swaps, forwards, options",["Workbench: Collateral and margin","col"],["Workbench: P&L explain","pnl"]],["FX, rates, equities and commodities",["Workbench: P&L explain","pnl"],["Certificate: Yale Financial Markets","credentials"],["Simulation: Citi Markets Sales & Trading","credentials"]],["Repo and securities financing",["Workbench: Collateral and margin","col"]],["Structured products: barriers, autocallables",["Workbench: Structured trade review","str"]],["Greeks and PV01",["Workbench: P&L explain","pnl"]],["Trade life cycle",["Section: The trade life cycle","lifecycle"]]]],
+ ["Markets operations",[["Collateral and margin (ISDA, CSA, VM, IM)",["Workbench: Collateral and margin","col"]],["Settlements (DVP, FOP, SSIs, CSDR, T+1)",["Workbench: Settlements","set"],["Section: Market structure","t1"]],["Corporate actions and income processing",["Workbench: Asset servicing","ast"]],["Daily P&L production and explain",["Workbench: P&L explain","pnl"],["Project: Portfolio Optimisation & P&L Attribution","work"]],["Trade confirmations and reconciliations",["Workbench: Trade reconciliation","rec"],["Paytm: debtor book reconciled to GL","experience"]],["Client and counterparty query handling",["Workbench: Asset servicing","ast"]]]],
+ ["Risk and control",[["Break management and exception monitoring",["Paytm: daily exception monitoring","experience"],["Project: Continuous Controls Monitoring","work"]],["KRIs, KPIs and RAG reporting",["Workbench: Metric governance","met"],["Paytm: RAG-rated ETA control","experience"]],["Root cause analysis and get-to-green",["Workbench: Metric governance","met"],["Certificate: Lean Six Sigma Green Belt","credentials"]],["Maker-checker controls and audit trails",["Paytm: approval trail on recovery notices","experience"]],["Operational risk and escalation",["Paytm: ticketing with breach alerts and escalation","experience"]]]],
+ ["Tools and technology",[["Advanced Excel: XLOOKUP, SUMIFS, pivots, Power Query",["Paytm: 23 trackers consolidated","experience"]],["VBA macros",["Paytm: VBA commentary engine","experience"]],["PowerPoint",["Project decks","work"]],["Power BI and DAX",["Project: Continuous Controls Monitoring","work"],["Certificate: Power BI Data Analyst","credentials"]],["SQL: joins, aggregation, window functions",["Workbench: Trade reconciliation","rec"],["Certificate: SQL for Data Science","credentials"]],["Python: pandas, NumPy",["Workbench: Structured trade review","str"],["Certificate: Python for Everybody","credentials"]],["SAP",["Paytm: cash application in SAP","experience"]],["Gen AI workflows",["Project: Automated Cash Reconciliation","work"]]]],
+ ["How I work",[["Attention to detail",["Paytm: GL reconciliation at Matched status","experience"]],["Initiative",["Paytm: control gap found and fixed unprompted","experience"]],["Leadership",["Treasurer; festival logistics for 2,000+","about"]],["Assertiveness",["Paytm: escalations to business leads","experience"]],["Communication",["Commentary for leadership; training another team","experience"]],["Comfortable across time zones and shifts",["Section: An operating day","top"]]]]];
+(function(){$("#sk").innerHTML=SK.map((g,gi)=>`<div class="skg"><h3>${g[0]}</h3><div class="skc">${g[1].map((s,si)=>`<button class="chip" data-s="${gi}-${si}" aria-pressed="false">${s[0]}</button>`).join("")}</div></div>`).join("");
+  const ev=$("#skev");function show(gi,si){const s=SK[gi][1][si];ev.innerHTML=`<p class="pt">${s[0]}</p><p class="ps">Where it shows</p>`+s.slice(1).map(e=>`<button class="dl evb" data-t="${e[1]}">${e[0]} →</button>`).join("");$$("#skev .evb").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.t;if(MODS[t]){openMod(t);$("#workbench").scrollIntoView({behavior:RM?"auto":"smooth"})}else{const el2=document.getElementById(t);if(el2)el2.scrollIntoView({behavior:RM?"auto":"smooth"})}}))}
+  $$("#sk .chip").forEach(c=>c.addEventListener("click",()=>{$$("#sk .chip").forEach(x=>x.setAttribute("aria-pressed",x===c?"true":"false"));const [gi,si]=c.dataset.s.split("-").map(Number);show(gi,si)}));
+  $("#sk .chip").setAttribute("aria-pressed","true");show(0,0)})();
+
+/* ===== trade life cycle ===== */
+const LC=[["Onboarding","Front office","KYC, legal agreements (ISDA, CSA, GMRA) and standing settlement instructions set up before the first trade.","Wrong static data or missing documents","Four-eyes checks on static data; document tracking",null],
+ ["Execution","Front office","Sales and trading agree the trade with the client within credit and market-risk limits.","Trading beyond limits; input errors","Pre-trade limit checks",null],
+ ["Capture and booking","Middle office","The trade is booked in the risk system with the right model, so risk and P&L are correct from day one.","Mis-booking; wrong model","Booking review against the term sheet","str"],
+ ["Confirmation","Operations","Legal terms are confirmed and matched with the counterparty.","Unconfirmed or disputed trades","Daily confirmation matching and ageing","rec"],
+ ["Clearing and settlement","Operations","Instructions are matched and cash and securities exchanged, usually delivery versus payment.","Fails and CSDR penalties","Pre-matching, sufficiency checks, fails management","set"],
+ ["Collateral and margin","Operations","Exposure is measured daily and margin called or returned under each CSA.","Uncollateralised exposure; disputes","Daily calls, portfolio reconciliation, dispute escalation","col"],
+ ["Asset servicing","Operations","Dividends, coupons and corporate actions are processed for the house and clients.","Missed entitlements; tax errors","Entitlement checks, claims, cash reconciliations","ast"],
+ ["P&L, risk and reporting","Middle office and finance","Daily P&L is produced and explained, metrics are governed and regulators are reported to.","Misstated P&L; unnoticed control failures","P&L explain, KRIs, root cause and get-to-green","pnl"]];
+(function(){$("#lcs").innerHTML=LC.map((s,i)=>`<button class="lcb" data-i="${i}" aria-pressed="${i===0}"><i>${i+1}</i>${s[0]}<small>${s[1]}</small></button>`).join("");
+  function show(i){const s=LC[i];$("#lcd").innerHTML=`<div><p class="eb" style="margin:0 0 .3rem">${s[1].toUpperCase()}</p><h3>${i+1}. ${s[0]}</h3><p>${s[2]}</p></div><div class="lcg"><div><span>Key risk</span><b>${s[3]}</b></div><div><span>Control</span><b>${s[4]}</b></div></div>${s[5]?`<button class="btn sm" data-go="${s[5]}">See it in the workbench →</button>`:""}`;
+    const g=$("#lcd [data-go]");if(g)g.addEventListener("click",()=>{openMod(g.dataset.go);$("#workbench").scrollIntoView({behavior:RM?"auto":"smooth"})})}
+  $$("#lcs .lcb").forEach(b=>b.addEventListener("click",()=>{$$("#lcs .lcb").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));show(+b.dataset.i)}));show(0)})();
+
+/* ===== derivatives payoff explorer ===== */
+(function(){const P=[["fwd","Forward"],["call","Call option"],["put","Put option"],["kip","Knock-in put"],["irs","Interest rate swap"]];let k="fwd";const st={K:100,B:70,prem:5};
+  const NOTE={fwd:"<b>Where operations meets it:</b> settles at maturity; if collateralised, the mark-to-market is margined daily under the CSA, and daily P&L comes from delta.",
+   call:"<b>Where operations meets it:</b> the premium settles up front; exposure moves with delta and volatility (vega), which drive margin calls and P&L explain.",
+   put:"<b>Where operations meets it:</b> the same mechanics as the call; a bought put is an asset the bank values daily and collateralises with the counterparty.",
+   kip:"<b>Where operations meets it:</b> path-dependent, so it is valued with Monte Carlo models; the barrier in the booking must match the term sheet, or P&L is wrong.",
+   irs:"<b>Where operations meets it:</b> periodic fixed and floating cash flows settle on payment dates; PV01 drives daily P&L and the variation margin exchanged."};
+  $("#dxP").innerHTML=P.map(x=>`<button data-k="${x[0]}" aria-pressed="${x[0]===k}">${x[1]}</button>`).join("");
+  function ctl(){const specs=k==="irs"?[]:k==="fwd"?[["K","Forward price",80,120,1,v=>v]]:k==="kip"?[["K","Strike",80,120,1,v=>v],["B","Barrier",50,95,1,v=>v],["prem","Premium paid",0,15,.5,v=>v]]:[["K","Strike",80,120,1,v=>v],["prem","Premium paid",0,15,.5,v=>v]];
+    const box=$("#dxIn");box.innerHTML="";box.id="dxIn";if(specs.length)sliders(box,specs,st,draw)}
+  function pay(S){if(k==="fwd")return S-st.K;if(k==="call")return Math.max(0,S-st.K)-st.prem;if(k==="put"||k==="kip")return Math.max(0,st.K-S)-st.prem;return 0}
+  function draw(){const s=$("#dxC");s.innerHTML="";const W=520,H=280,L=46,R=10,T=12,B=H-30;
+    if(k==="irs"){$("#dxT").textContent="Pay-fixed swap: value as rates move";$("#dxS").textContent="$100m notional, 5 years; PV01 about $45k per basis point";const xs=[];for(let bp=-200;bp<=200;bp+=10)xs.push([bp,bp*45e3/1e6]);
+      const y=axisY(s,-10,10,L,R,T,B,W,v=>"$"+v+"m");const x=v=>L+(v+200)/400*(W-L-R);el("line",{x1:x(0),x2:x(0),y1:T,y2:B,stroke:"var(--line2)"},s);
+      el("polyline",{points:xs.map(q=>x(q[0])+","+y(q[1])).join(" "),fill:"none",stroke:"var(--navy)","stroke-width":2.6},s);[-200,-100,0,100,200].forEach(v=>tx(s,x(v),H-10,(v>0?"+":"")+v+" bp",{"text-anchor":"middle"}));tx(s,x(120),y(6.5),"Rates up: paying fixed gains",{fill:"var(--up)","font-weight":"700"});tx(s,x(-190),y(-6.5),"Rates down: it loses",{fill:"var(--dn)","font-weight":"700"})}
+    else{$("#dxT").textContent={fwd:"Long forward",call:"Long call",put:"Long put",kip:"Long down-and-in put"}[k]+": payoff at maturity";$("#dxS").textContent=k==="kip"?"Solid: the barrier was touched during the trade's life, so it pays like a put. Dashed: never touched (only possible if the price stayed above the barrier), so only the premium is lost":"Underlying price at maturity on the horizontal axis; premium included where paid";
+      const xs=[];for(let S=50;S<=150;S+=1)xs.push([S,pay(S)]);const lo=Math.min(-20,...xs.map(q=>q[1])),hi=Math.max(20,...xs.map(q=>q[1]));const y=axisY(s,lo,hi,L,R,T,B,W,v=>grp(v,0));const x=v=>L+(v-50)/100*(W-L-R);
+      el("line",{x1:L,x2:W-R,y1:y(0),y2:y(0),stroke:"var(--line2)","stroke-width":1.4},s);
+      if(k!=="fwd"){el("line",{x1:x(st.K),x2:x(st.K),y1:T,y2:B,stroke:"var(--gold)","stroke-dasharray":"4 4"},s);tx(s,x(st.K)+4,T+12,(k==="fwd"?"Forward ":"Strike ")+st.K,{fill:"var(--gold)","font-weight":"700"})}
+      if(k==="kip"){el("line",{x1:x(st.B),x2:x(st.B),y1:T,y2:B,stroke:"var(--red)","stroke-dasharray":"4 4"},s);tx(s,x(st.B)+4,T+28,"Barrier "+st.B,{fill:"var(--red)","font-weight":"700"})}
+      el("polyline",{points:xs.map(q=>x(q[0]).toFixed(1)+","+y(q[1]).toFixed(1)).join(" "),fill:"none",stroke:"var(--navy)","stroke-width":2.6},s);
+      if(k==="kip"){el("line",{x1:x(st.B),x2:x(150),y1:y(-st.prem),y2:y(-st.prem),stroke:"var(--gold)","stroke-width":2.4,"stroke-dasharray":"7 5"},s);tx(s,x(150),y(-st.prem)+16,"never touched",{"text-anchor":"end",fill:"var(--gold)","font-weight":"700"});tx(s,x(52),y(pay(52))-8,"barrier touched",{fill:"var(--navy)","font-weight":"700"})}
+      [50,75,100,125,150].forEach(v=>tx(s,x(v),H-10,String(v),{"text-anchor":"middle"}))}
+    $("#dxN").innerHTML=NOTE[k]}
+  $$("#dxP button").forEach(b=>b.addEventListener("click",()=>{k=b.dataset.k;$$("#dxP button").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));ctl();draw()}));ctl();draw()})();
+
+/* ===== T+1 timeline ===== */
+(function(){const s=$("#t1c");if(!s)return;const W=760,H=190,L=110,R=14;const hrs=[9,12,15,18,21,24,27,30,33,36,39,42,45,48];const X=h=>L+(h-9)/(48-9)*(W-L-R);
+  [9,12,15,18,21,24,27,30,33,36,39,42,45,48].forEach(h=>{el("line",{x1:X(h),x2:X(h),y1:18,y2:H-26,stroke:"var(--line)"},s);tx(s,X(h),H-10,((h%24)+"").padStart(2,"0")+":00",{"text-anchor":"middle","font-size":"10"})});
+  tx(s,X(9),12,"Trade date (IST)",{"font-size":"10.5",fill:"var(--muted)"});tx(s,X(33),12,"Next day",{"font-size":"10.5",fill:"var(--muted)"});
+  const rows=[["T+2 today",[[13.5,21,"Trade and confirm","var(--line2)"],[21,33,"Match overnight and next day","var(--navy)"],[33,45,"Fix, fund, borrow","var(--gold)"]]],["T+1, Oct 2027",[[13.5,21,"Trade and confirm","var(--line2)"],[21,24.5,"Match","var(--red)"],[24.5,33,"Settle next morning","var(--navy)"]]]];
+  rows.forEach((r,i)=>{const y=34+i*62;tx(s,L-10,y+20,r[0],{"text-anchor":"end",fill:"var(--ink)","font-weight":"700","font-size":"12"});r[1].forEach(b=>{el("rect",{x:X(b[0]),y,width:X(b[1])-X(b[0]),height:30,rx:4,fill:b[3],opacity:b[3]==="var(--line2)"?1:.9},s);tx(s,X(b[0])+6,y+19,b[2],{fill:b[3]==="var(--line2)"?"var(--ink)":"#fff","font-size":"10.5","font-weight":"600"})})});
+})();
+openMod("col");
+setTimeout(()=>{buildDay()},60);
+
+</script>
+</body>
+</html>
