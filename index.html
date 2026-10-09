@@ -238,6 +238,7 @@ table.ind td:first-child{font-weight:700;white-space:nowrap}
 .fortag{margin-top:18px;display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--gold2);padding:10px 14px;border-radius:10px;font-size:.9rem;color:var(--ink2);max-width:640px}
 .fortag[hidden]{display:none}
 .fortag b{color:var(--ink)}
+.fortag a{color:var(--gold);font-weight:700}
 .fortag button{border:1px solid var(--gold2);background:transparent;color:var(--gold);border-radius:999px;padding:.35em .9em;font-weight:700;font-size:.82rem;cursor:pointer}
 .fortag button:hover{background:var(--goldt)}
 /* navy bands */
@@ -529,7 +530,7 @@ function axisY(svg,min,max,L,R,T,B,W,f){const span=max-min||1;const st=(()=>{con
 const FORS={jpmorgan:{n:"J.P. Morgan",d:"val",l:"Valuation and deal work first: the work closest to the Commercial & Investment Bank."},
  darashaw:{n:"Darashaw & Co.",d:"pf",l:"Debt markets, credit and project finance first: the core of Darashaw's work.",notes:/borrowing|bond/i},
  morganstanley:{n:"Morgan Stanley",d:"val",l:"Valuation, research and capital markets first."},
- goldmansachs:{n:"Goldman Sachs",d:"ma",l:"M&A, leveraged finance and capital markets first."},
+ goldmansachs:{n:"Goldman Sachs Corporate Treasury",d:"dcm",l:"Funding, bonds and collateral first. The margin-call, collateral and P&amp;L explain models are in the <a href='markets.html' target='_blank' rel='noopener'>markets workbench</a>.",notes:/borrowing|bond|yield/i,cvf:"Tarana_Bansal_Resume_Goldman_Sachs.pdf"},
  kotak:{n:"Kotak Investment Banking",d:"ipo",l:"Indian equity capital markets and deals first.",notes:/IPO/i},
  avendus:{n:"Avendus",d:"ma",l:"M&A and private markets first."},
  citi:{n:"Citi",d:"dcm",l:"Capital markets and credit first.",notes:/borrowing|bond/i},
@@ -538,6 +539,7 @@ const FORS={jpmorgan:{n:"J.P. Morgan",d:"val",l:"Valuation and deal work first: 
  deloitte:{n:"Deloitte",d:"val",l:"Valuation, due diligence and deal analysis first."},
  ey:{n:"EY",d:"val",l:"Valuation, due diligence and deal analysis first."},
  kpmg:{n:"KPMG",d:"val",l:"Valuation, due diligence and deal analysis first."}};
+FORS.gstreasury=FORS.goldmansachs;
 const FOR=FORS[(new URLSearchParams(location.search).get("for")||"").toLowerCase().replace(/[^a-z]/g,"")]||null;
 const DESKNAME={val:"Valuation",ma:"M&A",lbo:"LBO",ipo:"IPO",dcm:"Bonds and credit",pf:"Project finance",rx:"Restructuring",wealth:"Wealth",port:"Portfolio"};
 const FILES={ccm_nb:"CCM_Controls_Testing.ipynb",pmo:"CareerCompass_PMO_Deck.pptx",er_dabur:"Dabur_India_Initiation_Report.pdf",teaser:"Project_Orvelle_Teaser.pdf",xl_pf:"Project_Finance_Model_Solar.xlsx",xl_bond:"Bond_and_Credit_Model.xlsx",resume:"Tarana_Bansal_Resume.pdf",report:"Tarana_Bansal_Paytm_Internship_Report.pdf",dabur:"Dabur_Financial_Model.xlsx",wm_model:"Portfolio_Optimisation_Model.xlsx",wm_deck:"Portfolio_Optimisation_Deck.pptx",ccm_pdf:"CCM_Project_Deck.pdf",gt:"Healthcare_Transport_Case.pptx"};
@@ -613,7 +615,7 @@ function openDesk(k){$$(".rail button").forEach(b=>b.setAttribute("aria-selected
 $$(".rail button").forEach(b=>b.addEventListener("click",()=>openDesk(b.dataset.d)));
 document.addEventListener("keydown",e=>{if(e.target.closest("input,select,textarea")||e.metaKey||e.ctrlKey||e.altKey)return;const m=["val","ma","lbo","ipo","dcm","pf","rx","wealth","port"][+e.key-1];if(m){openDesk(m);const s=$("#studio").getBoundingClientRect();if(s.top>innerHeight||s.bottom<0)$("#studio").scrollIntoView({behavior:RM?"auto":"smooth"})}});
 
-(function(){if(!FOR)return;if(FOR.cv)document.querySelectorAll('[data-file="resume"]').forEach(x=>x.dataset.file=FOR.cv);const t=document.getElementById("forTag");if(!t)return;t.hidden=false;
+(function(){if(!FOR)return;if(FOR.cv)document.querySelectorAll('[data-file="resume"]').forEach(x=>x.dataset.file=FOR.cv);if(FOR.cvf)document.querySelectorAll('[data-file="resume"]').forEach(x=>x.setAttribute("href",FOR.cvf));const t=document.getElementById("forTag");if(!t)return;t.hidden=false;
   t.innerHTML=`<span>Prepared for <b>${FOR.n}</b>${FOR.n.endsWith(".")?"":"."} ${FOR.l}</span><button type="button">Start with the ${DESKNAME[FOR.d]} desk →</button>`;
   t.querySelector("button").addEventListener("click",()=>{openDesk(FOR.d);document.getElementById("studio").scrollIntoView({behavior:"smooth"})});
   document.title=document.title+" | for "+FOR.n})();
